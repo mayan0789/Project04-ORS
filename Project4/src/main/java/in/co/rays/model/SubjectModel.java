@@ -21,8 +21,7 @@ public class SubjectModel {
 	/**
 	 * Find next PK of Subject.
 	 *
-	 * @return the integer
-	 * @throws ApplicationException the application exception
+	 * 
 	 */
 
 	public int nextPk() throws ApplicationException {
@@ -50,10 +49,7 @@ public class SubjectModel {
 	/**
 	 * Add a Subject.
 	 *
-	 * @param bean the bean
-	 * @return the long
-	 * @throws ApplicationException the application exception
-	 * @throws DuplicateRecordException the duplicate record exception
+	 *
 	 */
 
  public int add(SubjectBean bean) throws ApplicationException,
@@ -121,9 +117,7 @@ public class SubjectModel {
 	
 	/**
 	 * Delete a Subject.
-	 *
-	 * @param bean the bean
-	 * @throws ApplicationException the application exception
+
 	 */
 
 	public void delete(SubjectBean bean) throws ApplicationException {
@@ -156,9 +150,7 @@ public class SubjectModel {
 	/**
 	 * Update a Subject.
 	 *
-	 * @param bean the bean
-	 * @throws ApplicationException the application exception
-	 * @throws DuplicateRecordException the duplicate record exception
+	 *
 	 */
 
 	 public void update(SubjectBean bean) throws ApplicationException,
@@ -174,9 +166,9 @@ public class SubjectModel {
 // }
 
  // get Course Name
-// CourseModel cModel = new CourseModel();
-// CourseBean CourseBean = cModel.findByPk(bean.getCourse_Id());
-// bean.setCourseName(CourseBean.getName());
+ CourseModel cModel = new CourseModel();
+ CourseBean CourseBean = cModel.findByPk(bean.getCourse_Id());
+ bean.setCourse_Name(CourseBean.getCourse_Name());
 
  try {
 
@@ -217,9 +209,6 @@ public class SubjectModel {
 	/**
 	 * Find User by Subject Name.
 	 *
-	 * @param name            : get parameter
-	 * @return bean
-	 * @throws ApplicationException the application exception
 	 */
 
 	public SubjectBean findByName(String name) throws ApplicationException {
@@ -263,9 +252,6 @@ public class SubjectModel {
 	/**
 	 * Find User by Subject PK.
 	 *
-	 * @param pk            : get parameter
-	 * @return bean
-	 * @throws ApplicationException the application exception
 	 */
 	public SubjectBean findByPk(long pk) throws ApplicationException {
 		//log.debug("Subject Model findBypk method Started");
@@ -310,9 +296,6 @@ public class SubjectModel {
 	/**
 	 * Search Subject.
 	 *
-	 * @param bean            : Search Parameters
-	 * @return the list
-	 * @throws ApplicationException the application exception
 	 */
 	
 	public List search(SubjectBean bean) throws ApplicationException{
@@ -322,11 +305,6 @@ public class SubjectModel {
 	/**
 	 * Search Subject with pagination.
 	 *
-	 * @param bean            : Search Parameters
-	 * @param pageNo            : Current Page No.
-	 * @param pageSize            : Size of Page
-	 * @return list : List of Users
-	 * @throws ApplicationException the application exception
 	 */
 
 
@@ -399,8 +377,6 @@ public class SubjectModel {
 	/**
 	 * Get List of Subject.
 	 *
-	 * @return list : List of Subject
-	 * @throws ApplicationException the application exception
 	 */
 	public List list() throws ApplicationException{
 		return list(0,0);
@@ -409,10 +385,6 @@ public class SubjectModel {
 	/**
 	 * Get List of Subject with pagination.
 	 *
-	 * @param pageNo            : Current Page No.
-	 * @param pageSize            : Size of Page
-	 * @return list : List of Subject
-	 * @throws ApplicationException the application exception
 	 */
 	public List list(int pageNo, int pageSize) throws ApplicationException {
 		//log.debug("Subject Model list method Started");

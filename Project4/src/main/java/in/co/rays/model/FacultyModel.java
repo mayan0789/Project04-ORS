@@ -26,8 +26,6 @@ public class FacultyModel {
 	/**
 	 * Find next PK of Faculty.
 	 *
-	 * @return the integer
-	 * @throws ApplicationException the application exception
 	 */
 
 	public int nextPk() throws ApplicationException {
@@ -56,39 +54,27 @@ public class FacultyModel {
 	/**
 	 * Add a Faculty.
 	 *
-	 * @param bean the bean
-	 * @return the int
-	 * @throws ApplicationException the application exception
-	 * @throws DuplicateRecordException the duplicate record exception
-	 */
-
-	/**
-	 * @param bean
-	 * @return
-	 * @throws ApplicationException
-	 * @throws DuplicateRecordException
 	 */
 	public int add(FacultyBean bean) throws ApplicationException, DuplicateRecordException {
 	//	log.debug("Model add Started");
 		Connection conn = null;
-		//System.out.println("gender :- "+bean.getGender());
 		int pk = 0;
 		CollegeModel collegeModel = new CollegeModel();	
 		CollegeBean collegeBean = collegeModel.findByPK(bean.getCollege_id());
 		bean.setCollege_Name(collegeBean.getName());
-		
+	
 		CourseModel CourseModel = new CourseModel();	
-		CourseBean CourseBean = CourseModel.findByPk(bean.getCollege_id());
+		CourseBean CourseBean = CourseModel.findByPk(bean.getCourse_id());
 		bean.setCourse_Name(CourseBean.getCourse_Name());
 		
 		SubjectModel subjectModel = new SubjectModel();
 		SubjectBean subjectBean = subjectModel.findByPk(bean.getSubject_id());
 		bean.setSubject_Name(subjectBean.getSubject_Name());
 		
-//		FacultyBean beanExist = findByEmail(bean.getEmail_id());
-//		if (beanExist != null) { 
-//			  throw new DuplicateRecordException("Email already exists"); 
-//			  }
+		FacultyBean beanExist = findByEmail(bean.getEmail_id());
+		if (beanExist != null) { 
+			  throw new DuplicateRecordException("Email already exists"); 
+			  }
 //		 
 
 		try {
@@ -141,8 +127,6 @@ public class FacultyModel {
 	/**
 	 * Delete a Faculty.
 	 *
-	 * @param bean the bean
-	 * @throws ApplicationException the application exception
 	 */
 	public void delete(FacultyBean bean) throws ApplicationException {
 		//log.debug("Faculty Model Delete method End");
@@ -172,9 +156,6 @@ public class FacultyModel {
 	/**
 	 * Update a Faculty.
 	 *
-	 * @param bean the bean
-	 * @throws ApplicationException the application exception
-	 * @throws DuplicateRecordException the duplicate record exception
 	 */
 
 	public void update(FacultyBean bean) throws ApplicationException, DuplicateRecordException {
@@ -185,8 +166,8 @@ public class FacultyModel {
 		bean.setCollege_Name(collegeBean.getName());
 		
 		CourseModel CourseModel = new CourseModel();	
-		CourseBean CourseBean = CourseModel.findByPk(bean.getCollege_id());
-		bean.setCollege_Name(CourseBean.getCourse_Name());
+		CourseBean CourseBean = CourseModel.findByPk(bean.getCourse_id());
+		bean.setCourse_Name(CourseBean.getCourse_Name());
 		
 		SubjectModel subjectModel = new SubjectModel();
 		SubjectBean subjectBean = subjectModel.findByPk(bean.getSubject_id());
@@ -195,7 +176,7 @@ public class FacultyModel {
 		FacultyBean beanExist = findByEmail(bean.getEmail_id());
 		// Check if updated EmailId already exist
 		if (beanExist != null && !(beanExist.getId() == bean.getId())) {
-			throw new DuplicateRecordException("EmailId is already exist");
+			throw new DuplicateRecordException("Given Email Id already exist");
 		}
 
 
@@ -245,9 +226,6 @@ public class FacultyModel {
 	/**
 	 * Find User by Faculty name.
 	 *
-	 * @param EmailId            : get parameter
-	 * @return bean
-	 * @throws ApplicationException the application exception
 	 */
 	
 	public FacultyBean findByEmail(String EmailId) throws ApplicationException {
@@ -258,16 +236,16 @@ public class FacultyModel {
 		Connection conn = null;
 		FacultyBean bean = null;
 		
-		System.out.println(" faculty  find by name 1");
+	//	System.out.println(" faculty  find by name 1");
 		try {
 			conn = JDBCDataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			
-			System.out.println("prepared");
+		//	System.out.println("prepared");
 			pstmt.setString(1, EmailId);
-			System.out.println("resultset"+EmailId);
+			//System.out.println("resultset"+EmailId);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(" faculty  find by name 1 while");
+		//	System.out.println(" faculty  find by name 1 while");
 			while (rs.next()) {
 				bean = new FacultyBean();
 				bean.setId(rs.getInt(1));
@@ -288,7 +266,7 @@ public class FacultyModel {
 				bean.setModifiedBy(rs.getString(16));
 				bean.setCreatedDateTime(rs.getTimestamp(17));
 				bean.setModifiedDateTime(rs.getTimestamp(18));
-      	System.out.println(" faculty  find by name 3");
+    //  	System.out.println(" faculty  find by name 3");
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -298,7 +276,7 @@ public class FacultyModel {
 		} finally {
 			JDBCDataSource.closeConnection(conn);
 		}
-		System.out.println(" faculty  find by name 4");
+		//System.out.println(" faculty  find by name 4");
 		//log.debug("Faculty Model findbyName method End");
 		return bean;
 	}
@@ -306,9 +284,6 @@ public class FacultyModel {
 	/**
 	 * Find User by Faculty PK.
 	 *
-	 * @param pk            : get parameter
-	 * @return bean
-	 * @throws ApplicationException the application exception
 	 */
 
 	public FacultyBean findByPk(long pk) throws ApplicationException {
@@ -358,9 +333,6 @@ public class FacultyModel {
 	/**
 	 * Search Faculty.
 	 *
-	 * @param bean            : Search Parameters
-	 * @return the list
-	 * @throws ApplicationException the application exception
 	 */
 
 	public List search(FacultyBean bean) throws ApplicationException{
@@ -370,16 +342,10 @@ public class FacultyModel {
 	/**
 	 * Search Faculty with pagination.
 	 *
-	 * @param bean            : Search Parameters
-	 * @param pageNo            : Current Page No.
-	 * @param pageSize            : Size of Page
-	 * @return list : List of Users
-	 * @throws ApplicationException the application exception
 	 */
 
 	public List search(FacultyBean bean, int pageNo, int pageSize) throws ApplicationException {
 		//log.debug("Faculty Model search  method Started");
-		System.out.println("faculty model");
 		StringBuffer sql = new StringBuffer("SELECT * FROM ST_FACULTY WHERE true");
 		if (bean!=null) {
 			if (bean.getId()>0) {
@@ -431,7 +397,7 @@ public class FacultyModel {
 			pageNo = (pageNo-1)*pageSize;
 			sql.append(" limit "+pageNo+ " , " + pageSize);
 		}
-	     System.out.println("final sql  "+sql);
+	     System.out.println("faculty model search  "+sql);
 		Connection conn = null;
 		ArrayList list = new ArrayList();
 		try{
@@ -461,9 +427,7 @@ public class FacultyModel {
 				bean.setCreatedDateTime(rs.getTimestamp(17));
 				bean.setModifiedDateTime(rs.getTimestamp(18));
 				
-System.out.println("out whiile");
 				list.add(bean);
-				System.out.println("list size ----------->"+list.size());
 			}
 			rs.close();
 			
@@ -484,8 +448,6 @@ System.out.println("out whiile");
 	/**
 	 * Get List of Faculty.
 	 *
-	 * @return list : List of Faculty
-	 * @throws ApplicationException the application exception
 	 */
 
 	public List list() throws ApplicationException{
@@ -495,10 +457,6 @@ System.out.println("out whiile");
 	/**
 	 * Get List of Faculty with pagination.
 	 *
-	 * @param pageNo            : Current Page No.
-	 * @param pageSize            : Size of Page
-	 * @return list : List of Faculty
-	 * @throws ApplicationException the application exception
 	 */
 
 	public List list(int pageNo, int pageSize) throws ApplicationException {

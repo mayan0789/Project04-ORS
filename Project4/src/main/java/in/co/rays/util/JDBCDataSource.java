@@ -9,7 +9,11 @@ import in.co.rays.exception.ApplicationException;
 
 import java.sql.Connection;
 
-public class JDBCDataSource {
+/**
+ * @author Mayank
+ *
+ */
+public final class JDBCDataSource {
 
 	private JDBCDataSource() {
     }
@@ -25,7 +29,6 @@ public class JDBCDataSource {
     /**
      * Create instance of Connection Pool
      * 
-     * @return
      */
     public static JDBCDataSource getInstance() {
         if (datasource == null) {
@@ -49,15 +52,6 @@ public class JDBCDataSource {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        /*    datasource.cpds.setJdbcUrl(PropertyReader.getValue("url"));
-            datasource.cpds.setUser(PropertyReader.getValue("username"));
-            datasource.cpds.setPassword(PropertyReader.getValue("password"));
-            datasource.cpds.setInitialPoolSize(new Integer((String) PropertyReader.getValue("initialPoolSize")));
-            datasource.cpds.setAcquireIncrement(new Integer((String) PropertyReader.getValue("acquireIncrement")));
-            datasource.cpds.setMaxPoolSize(new Integer((String) PropertyReader.getValue("maxPoolSize")));
-            datasource.cpds.setMaxIdleTime(DataUtility.getInt(PropertyReader.getValue("timeout")));
-            datasource.cpds.setMinPoolSize(new Integer((String) PropertyReader.getValue("minPoolSize")));
-        */    
           
         }
         return datasource;
@@ -66,7 +60,6 @@ public class JDBCDataSource {
     /**
      * Gets the connection from ComboPooledDataSource
      * 
-     * @return connection
      */
     public static Connection getConnection() throws Exception {
         return getInstance().cpds.getConnection();
@@ -75,7 +68,6 @@ public class JDBCDataSource {
     /**
      * Closes a connection
      * 
-     * @param connection
      * 
      */
     public static void closeConnection(Connection connection) {

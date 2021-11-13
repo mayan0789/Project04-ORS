@@ -46,7 +46,7 @@
 
 <table>
 	<tr>
-	<th align="right">Course Name <span style="color: red">*</span></th>
+	<th align="left">Course Name <span style="color: red">*</span></th>
 	<td><input type="text" name ="name" placeholder="Enter Course Name" size="24" value="<%=DataUtility.getStringData(bean.getCourse_Name()) %>">
 	</td><td style="position: fixed"><font  color="red"><%=ServletUtility.getErrorMessage("name", request) %></font>
 	</td>
@@ -54,7 +54,7 @@
 <tr><th style="padding: 3px"></th></tr>	
 	
 	<tr>
-	<th align="right">Duration <span style="color:red">*</span></th>
+	<th align="left">Duration <span style="color:red">*</span></th>
 	<td>
 	<%
 	LinkedHashMap map = new LinkedHashMap();
@@ -75,8 +75,8 @@
 	</tr>
 <tr><th style="padding: 3px"></th></tr>	
 	<tr>
-	<th align="right">Description <span style="color: red" >*</span></th>
-	<td><input type="text" name ="description" placeholder="Enter Description" size="25" value="<%=DataUtility.getStringData(bean.getDescription())%>">
+	<th align="left">Description <span style="color: red" >*</span></th>
+	<td><input type="text" name ="description" placeholder="Enter Description" size="24" value="<%=DataUtility.getStringData(bean.getDescription())%>">
 	</td><td style="position: fixed"  ><font color="red"><%=ServletUtility.getErrorMessage("description", request) %></font>
 	</td>
 	</tr>

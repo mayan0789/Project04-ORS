@@ -12,6 +12,7 @@ public class FacultyBean extends BaseBean {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private String First_Name;
 	private String Last_Name;
 	private String Gender;

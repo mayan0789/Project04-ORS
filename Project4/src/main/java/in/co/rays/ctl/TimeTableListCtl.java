@@ -160,7 +160,7 @@ public class TimeTableListCtl extends BaseCtl {
 									ServletUtility.handleException(e, request, response);
 									return;
 								}
-								ServletUtility.setSuccessMessage("Data Deleted Succesfully", request);
+								ServletUtility.setSuccessMessage("Rrecord Deleted Succesfully", request);
 							}
 						
 						}else{

@@ -1,6 +1,11 @@
 package in.co.rays.bean;
 
 public class CourseBean extends BaseBean{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String Course_Name;
 	private String Description;
 	private String Duration;
@@ -35,7 +40,7 @@ public class CourseBean extends BaseBean{
 
 	public String getkey() {
 		// TODO Auto-generated method stub
-		return id + "";
+		return id+"";
 	}
 
 	public String getvalue() {

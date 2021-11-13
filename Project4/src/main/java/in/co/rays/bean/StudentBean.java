@@ -70,10 +70,11 @@ public class StudentBean extends BaseBean {
 	}
 	public String getvalue() {
 		// TODO Auto-generated method stub
-		return First_Name;
+		String fn = First_Name;
+		String ln = Last_Name;
+		
+		String namme = fn+" "+ln;
+		return namme;
 	}
-
-
-
 
 }

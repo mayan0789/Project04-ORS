@@ -26,6 +26,7 @@ import in.co.rays.util.PropertyReader;
 import in.co.rays.util.ServletUtility;
 
 /**
+ * 
  * @author Mayank
  *
  */
@@ -154,13 +155,14 @@ public class TimeTableCtl extends BaseCtl {
 			try {
 				if(id>0){
 					model.update(bean);
+					ServletUtility.setSuccessMessage("Successfully Updated", request);
+
 				}else{
-//			System.out.println("innnnnnnnnnnnnnnnnn adddddddddd method");
 				model.add(bean);
-	//			System.out.println("innnnnnnnnnnnnnnnnn adddddddddd method outttttttttttttt");
+				ServletUtility.setSuccessMessage("Successfully Saved", request);
+
 				} 
 				ServletUtility.setBean(bean, request);
-				ServletUtility.setSuccessMessage(" TimeTable is Successfully Saved", request);
 				
 			}catch (ApplicationException e) {
 				log.error(e);

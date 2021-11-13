@@ -3,6 +3,9 @@
 <%@page import="in.co.rays.util.DataUtility"%>
 <%@page import="in.co.rays.util.ServletUtility"%>
 <html>
+<head> 
+<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
+<title> Add Role</title></head>
 <body>
     <form action="<%=ORSView.ROLE_CTL%>" method="post">
         <%@ include file="Header.jsp"%>
@@ -11,7 +14,18 @@
             scope="request"></jsp:useBean>
 
         <center>
-            <h1>Add Role</h1>
+		<%
+				if (bean.getId() > 0) {
+			%>
+			<h1>Update Role</h1>
+			<%
+				} else {
+			%>
+			<h1>Add Role</h1>
+			<%
+				}
+			%>
+		
             <H2>
                 <font color="green"> <%=ServletUtility.getSuccessMessage(request)%>
                 </font>
@@ -30,23 +44,30 @@
 
             <table>
                 <tr>
-                    <th>Name*</th>
-                    <td><input type="text" name="name"
-                        value="<%=DataUtility.getStringData(bean.getName())%>"><font
+                    <th align="left">Name<span style="color: red">*</span></th>
+                    <td><input type="text" name="name" placeholder="Enter Name Here"
+                        value="<%=DataUtility.getStringData(bean.getName())%>"></td> <td style="position : fixed;"><font
                         color="red"> <%=ServletUtility.getErrorMessage("name", request)%></font></td>
                 </tr>
                 <tr>
-                    <th>Description*</th>
-                    <td><input type="text" name="description"
-                        value="<%=DataUtility.getStringData(bean.getDescription())%>"><font
+                    <th align="left">Description<span style="color: red">*</span></th>
+                    <td><input type="text" name="description" placeholder="Enter a Description Here"
+                        value="<%=DataUtility.getStringData(bean.getDescription())%>"></td> <td style="position : fixed;"><font
                         color="red"> <%=ServletUtility.getErrorMessage("description", request)%></font></td>
                 </tr>
                 <tr>
                     <th></th>
-                    <td colspan="2"><input type="submit" name="operation"
-                        value="<%=RoleCtl.OP_SAVE%>">&emsp; <input type="submit"
-                        name="operation" value="<%=RoleCtl.OP_CANCEL%>"></td>
-                </tr>
+<%
+		if(bean.getId() > 0){ %>
+		<td>
+		<input type="submit" name="operation" value="<%=RoleCtl.OP_UPDATE%>">
+		<input type="submit" name="operation" value="<%=RoleCtl.OP_CANCEL%>"></td>
+		<%}else{ %>
+		<td>
+		<input type="submit" name="operation" value="<%=RoleCtl.OP_SAVE %>">
+		<input type="submit" name="operation" value="<%=RoleCtl.OP_RESET%>"></td>
+	
+		<%} %>                </tr>
             </table>
     </form>
     </center>

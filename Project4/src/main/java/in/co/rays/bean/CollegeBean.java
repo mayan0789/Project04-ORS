@@ -6,6 +6,10 @@ package in.co.rays.bean;
  */
 public class CollegeBean extends BaseBean {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String Name ;
 	private String Address;
 	private String State;

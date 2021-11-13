@@ -1,4 +1,4 @@
-
+<%@page import="in.co.rays.ctl.ORSView"%>
 <%@page import="in.co.rays.util.HTMLUtility"%>
 <%@page import="javax.swing.text.html.HTML"%>
 <%@page import="in.co.rays.bean.CollegeBean"%>
@@ -53,9 +53,9 @@
         </h1>
 		
 		<div>
-		<h1><font style="color: green"><%=ServletUtility.getSuccessMessage(request) %></font></h1>
-		<h1><font style="color: red"><%=ServletUtility.getErrorMessage(request) %></font>
-		</h1>
+		<h2><font style="color: green"><%=ServletUtility.getSuccessMessage(request) %></font></h2>
+		<h2><font style="color: red"><%=ServletUtility.getErrorMessage(request) %></font>
+		</h2>
 		</div>
 		
 		<input type="hidden" name="id" value="<%=bean.getId()%>">
@@ -67,45 +67,45 @@
 	<table>
 	
 		<tr>
-		<th align="right">CollegeName <span style="color: red">*</span></th>
+		<th align="left">CollegeName <span style="color: red">*</span></th>
 		<td><%=HTMLUtility.getList("collegename", String.valueOf(bean.getCollege_Id()), clist) %>
 		<td style="position: fixed"><font color="red" ><%=ServletUtility.getErrorMessage("collegename", request)%></font>
 		</td>
 		</tr>
 	  <tr><th style="padding: 3px"></th></tr>    	
 		<tr>
-		<th align="right">FirstName <span style="color: red">*</span></th>
-		<td><input type="text" name="firstname" placeholder="Enter First Name" size="25" value="<%=DataUtility.getStringData(bean.getFirst_Name())%>"></td>
+		<th align="left">FirstName <span style="color: red">*</span></th>
+		<td><input type="text" name="firstname" placeholder="Enter First Name" size="24" value="<%=DataUtility.getStringData(bean.getFirst_Name())%>"></td>
 		<td style="position: fixed"><font  color="red"><%=ServletUtility.getErrorMessage("firstname", request)%></font>
 		</td>
 		</tr>
 		  <tr><th style="padding: 3px"></th></tr>    
 		<tr>
-		<th align="right" >LastName <span style="color: red">*</span></th>
-		<td><input type="text" name="lastname" placeholder="Enter Last Name" size="25" value="<%=DataUtility.getStringData(bean.getLast_Name())%>"></td>
+		<th align="left" >LastName <span style="color: red">*</span></th>
+		<td><input type="text" name="lastname" placeholder="Enter Last Name" size="24" value="<%=DataUtility.getStringData(bean.getLast_Name())%>"></td>
 		<td style="position: fixed"><font  color="red"><%=ServletUtility.getErrorMessage("lastname", request)%></font>
 		</td>
 		</tr>
 		  <tr><th style="padding: 3px"></th></tr>    
 		<tr>
-					<th align="left">Date Of Birth<font color="red">*</font></th>
+					<th align="left">Date Of Birth <font color="red">*</font></th>
 					<td><input type="text" name="dob" id="datepicker"
 						placeholder="Enter Date Of Birth" readonly="readonly"
 						
-						value="<%=DataUtility.getDateString(bean.getDate_of_Birth())%>">
+						value="<%=DataUtility.getDateString(bean.getDate_of_Birth())%>" size="24">
 						&nbsp;<font style="position: fixed;" color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
 						 <tr><th style="padding: 3px"></th></tr>    
 		<tr>
-		<th align="right">MobileNo <span style="color: red">*</span></th>
-		<td><input type="text" name="mobile" maxlength="10" placeholder="Enter Mobile No" size="25" value="<%=DataUtility.getStringData(bean.getMobile_No())%>"></td>
+		<th align="left">MobileNo <span style="color: red">*</span></th>
+		<td><input type="text" name="mobile" maxlength="10" placeholder="Enter Mobile No" size="24" value="<%=DataUtility.getStringData(bean.getMobile_No())%>"></td>
 		<td style="position: fixed" ><font color="red"><%=ServletUtility.getErrorMessage("mobile", request)%></font>
 		</td>
 		</tr>
 		  <tr><th style="padding: 3px"></th></tr>    
 		<tr>
-		<th align="right">Email-Id <span style="color: red">*</span></th>
-		<td><input type="text" name="email" placeholder="Enter Email_Id" size="25" value="<%=DataUtility.getStringData(bean.getEmail())%>"></td>
+		<th align="left">Email-Id <span style="color: red">*</span></th>
+		<td><input type="text" name="email" placeholder="Enter Email_Id" size="24" value="<%=DataUtility.getStringData(bean.getEmail())%>"></td>
 		<td style="position: fixed" ><font color="red"><%=ServletUtility.getErrorMessage("email", request)%></font>
 		</td>
 		</tr>

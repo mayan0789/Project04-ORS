@@ -18,7 +18,7 @@ public class EmailUtility {
      * Create Resource Bundle to read properties file
      */
     static ResourceBundle rb = ResourceBundle
-            .getBundle("in.co.rays.project4.bundle.System");
+            .getBundle("in.co.rays.bundle.system");
 
     /**
      * Email Server
@@ -55,7 +55,9 @@ public class EmailUtility {
      * Static block to initialize static parameters
      */
     static {
-        props.put("mail.smtp.host", SMTP_HOST_NAME);
+    	 props.put("mail.smtp.starttls.enable", "true");
+         props.put("mail.smtpEnableSSl.enable", "true");
+    	props.put("mail.smtp.host", SMTP_HOST_NAME);
         props.put("mail.smtp.auth", "true");
         props.put("mail.debug", "true");
         props.put("mail.smtp.port", SMTP_PORT);
@@ -71,7 +73,7 @@ public class EmailUtility {
      *            : Email message
      * @throws ApplicationException
      */
-    public static void sendMail(EmailMessage emailMessageDTO)
+    public static boolean sendMail(EmailMessage emailMessageDTO)
             throws ApplicationException {
 
         try {
@@ -161,8 +163,10 @@ public class EmailUtility {
             // Send the mail
             Transport.send(msg);
 
+            return true;
         } catch (Exception ex) {
         	ex.printStackTrace();
+        	return false;
             //throw new ApplicationException("Email " + ex.getMessage());
         }
     }

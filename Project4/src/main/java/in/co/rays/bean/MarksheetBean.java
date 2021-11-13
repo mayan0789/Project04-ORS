@@ -55,7 +55,7 @@ public class MarksheetBean extends BaseBean {
 		return Maths;
 	}
 	public String getkey() {
-		return id+" ";
+		return id+"";
 		// TODO Auto-generated method stub
 		
 	}

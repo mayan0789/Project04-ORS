@@ -3,7 +3,6 @@ package in.co.rays.ctl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +26,10 @@ import in.co.rays.util.ServletUtility;
 @WebServlet("/ctl/CollegeCtl")
 public class CollegeCtl extends BaseCtl {
 	
-	private static final int serialVersionUID = 1;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	   // private static Logger log = Logger.getLogger(CollegeCtl.class);
 
@@ -42,6 +44,10 @@ public class CollegeCtl extends BaseCtl {
 	            request.setAttribute("name",
 	                    PropertyReader.getValue("error.require", "Name"));
 	            pass = false;
+	        }else  if (!DataValidator.isName(request.getParameter("name"))) {
+	            request.setAttribute("name",
+	                    PropertyReader.getValue("error.name", "Name"));
+	            pass = false;
 	        }
 
 	        if (DataValidator.isNull(request.getParameter("address"))) {
@@ -54,15 +60,26 @@ public class CollegeCtl extends BaseCtl {
 	            request.setAttribute("state",
 	                    PropertyReader.getValue("error.require", "State"));
 	            pass = false;
+	        }else if (!DataValidator.isName(request.getParameter("state"))) {
+	            request.setAttribute("state",
+	                    PropertyReader.getValue("error.name", "State name"));
+	            pass = false;
 	        }
 	        if (DataValidator.isNull(request.getParameter("city"))) {
 	            request.setAttribute("city",
-	                    PropertyReader.getValue("error.require", "city"));
+	                    PropertyReader.getValue("error.require", "City"));
+	            pass = false;
+	        }else if (!DataValidator.isName(request.getParameter("city"))) {
+	            request.setAttribute("city",
+	                    PropertyReader.getValue("error.name", "City name"));
 	            pass = false;
 	        }
 	        if (DataValidator.isNull(request.getParameter("phoneNo"))) {
 	            request.setAttribute("phoneNo",
 	                    PropertyReader.getValue("error.require", "Phone No"));
+	            pass = false;
+	        }else if (!DataValidator.isMobileNo(request.getParameter("phoneNo"))) {
+	            request.setAttribute("phoneNo", "Mobile No. must start with 6-9 and contain ten digits only");
 	            pass = false;
 	        }
 
@@ -103,7 +120,6 @@ public class CollegeCtl extends BaseCtl {
 	    protected void doGet(HttpServletRequest request,
 	            HttpServletResponse response) throws ServletException, IOException {
 
-	        String op = DataUtility.getString(request.getParameter("operation"));
 
 	        // get model
 	        CollegeModel model = new CollegeModel();
@@ -140,19 +156,24 @@ public class CollegeCtl extends BaseCtl {
 
 	        long id = DataUtility.getLong(request.getParameter("id"));
 
-	        if (OP_SAVE.equalsIgnoreCase(op)) {
+	        if (OP_SAVE.equalsIgnoreCase(op) || OP_UPDATE.equalsIgnoreCase(op)) {
 
 	            CollegeBean bean = (CollegeBean) populateBean(request);
 
 	            try {
 	                if (id > 0) {
 	                    model.update(bean);
+	                    ServletUtility.setSuccessMessage("Successfully Updated",
+		                        request);
 	                } else {
-	                    int pk = model.add(bean);
-	                    bean.setId(pk);
+	                   // int pk ;
+	                    		model.add(bean);
+	                    		 ServletUtility.setSuccessMessage("Successfully Saved",
+	         	                        request);
+	                  //  bean.setId(pk);
 	                }
 	                ServletUtility.setBean(bean, request);
-	                ServletUtility.setSuccessMessage("Data is successfully saved",
+	                ServletUtility.setSuccessMessage("successfully saved",
 	                        request);
 
 	            } catch (ApplicationException e) {
@@ -165,22 +186,7 @@ public class CollegeCtl extends BaseCtl {
 	                        request);
 	            }
 
-	        } else if (OP_DELETE.equalsIgnoreCase(op)) {
-
-	            CollegeBean bean = (CollegeBean) populateBean(request);
-	            try {
-	                model.delete(bean);
-	                ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, request,
-	                        response);
-	                return;
-
-	            } catch (ApplicationException e) {
-	                //log.error(e);
-	                ServletUtility.handleException(e, request, response);
-	                return;
-	            }
-
-	        } else if (OP_CANCEL.equalsIgnoreCase(op)) {
+	        }  else if (OP_CANCEL.equalsIgnoreCase(op)) {
 
 	            ServletUtility
 	                    .redirect(ORSView.COLLEGE_LIST_CTL, request, response);

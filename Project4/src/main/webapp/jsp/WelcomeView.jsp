@@ -6,12 +6,10 @@
 <%@page import="in.co.rays.bean.*"%>
 <html>
 <head>
+<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
 </head>
-
-
-
 
 <body>
     <form action="<%=ORSView.WELCOME_CTL%>">

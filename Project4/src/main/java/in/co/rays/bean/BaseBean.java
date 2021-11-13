@@ -13,11 +13,12 @@ public abstract class BaseBean implements DropdownlistBean, Serializable, Compar
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	protected long id;
+	 protected long id;
 	 protected String CreatedBy;
 	 protected String ModifiedBy;
 	 protected Timestamp CreatedDateTime;
 	 protected Timestamp ModifiedDateTime;
+	 
 	public long getId() {
 		return id;
 	}

@@ -39,7 +39,7 @@ public class FacultyCtl extends BaseCtl {
 	
 	protected void preload (HttpServletRequest request){
 		
-		System.out.println("preload  in ");
+		System.out.println("Faculty ctl preload  in ");
 		
 		CourseModel crsm = new CourseModel();
 		CollegeModel cm = new CollegeModel();
@@ -66,22 +66,22 @@ public class FacultyCtl extends BaseCtl {
 	
 	protected boolean validate(HttpServletRequest request){
 		
-		System.out.println("validate  in ");
+		System.out.println("Faculty ctl validate  in ");
 		
 		log.debug("Validate Method of Faculty Ctl Started");
 		boolean pass = true;
 		if(DataValidator.isNull(request.getParameter("firstname"))){
-			request.setAttribute("firstname", PropertyReader.getValue("error.require", "FirstName"));
+			request.setAttribute("firstname", PropertyReader.getValue("error.require", "First Name"));
 			 pass = false;
 		}else if (!DataValidator.isValidName(request.getParameter("firstname"))) {
-			request.setAttribute("firstname", PropertyReader.getValue("error.name", "Invalid First"));
+			request.setAttribute("firstname", PropertyReader.getValue("error.name", "First Name"));
 			 pass = false;
 		}
 		if(DataValidator.isNull(request.getParameter("lastname"))){
-			request.setAttribute("lastname", PropertyReader.getValue("error.require", "LastName"));
+			request.setAttribute("lastname", PropertyReader.getValue("error.require", "Last Name"));
 			pass = false;
 		}else if (!DataValidator.isValidName(request.getParameter("lastname"))) {
-			request.setAttribute("lastname", PropertyReader.getValue("error.name", "Invalid Last"));
+			request.setAttribute("lastname", PropertyReader.getValue("error.name", "Last Name"));
 			 pass = false;
 			
 		}
@@ -92,19 +92,23 @@ public class FacultyCtl extends BaseCtl {
 		if (DataValidator.isNull("doj")) {
 			request.setAttribute("doj", PropertyReader.getValue("error.require", "Date of Joining"));
 			pass = false;
-		}else if(!DataValidator.isDate(request.getParameter("doj"))){
-			request.setAttribute("doj", PropertyReader.getValue("error.date", "Date of Joining"));
-			pass=false;
-		}
+		} /*
+			 * else if(!DataValidator.isDate(request.getParameter("doj"))){
+			 * request.setAttribute("doj", PropertyReader.getValue("error.date",
+			 * "Date of Joining")); pass=false; }
+			 */
 		if(DataValidator.isNull(request.getParameter("qualification"))){
 			request.setAttribute("qualification", PropertyReader.getValue("error.require", "Qualification"));
+			pass = false;
+		}else if(!DataValidator.isName(request.getParameter("qualification"))){
+			request.setAttribute("qualification", PropertyReader.getValue("error.name", "Qualification"));
 			pass = false;
 		}
 		if(DataValidator.isNull(request.getParameter("loginid"))){
 			request.setAttribute("loginid", PropertyReader.getValue("error.require", "LoginId"));
 			pass = false;
 		}else if (!DataValidator.isEmail(request.getParameter("loginid"))) {
-			request.setAttribute("loginid", PropertyReader.getValue("error.email", "Invalid"));
+			request.setAttribute("loginid", PropertyReader.getValue("error.email", "This"));
 			pass = false;
 		}
 		if (DataValidator.isNull(request.getParameter("mobileno"))) {
@@ -131,7 +135,7 @@ public class FacultyCtl extends BaseCtl {
 		}
 		
 		
-		System.out.println("validate out ");
+		System.out.println("Faculty ctl validate out ");
 		log.debug("validate Ended");
 		return pass;
 	}
@@ -147,8 +151,6 @@ public class FacultyCtl extends BaseCtl {
 		fb.setGender(DataUtility.getString(request.getParameter("gender")));
 		fb.setDOJ(DataUtility.getDate(request.getParameter("doj")));
 		
-		
-//		System.out.println("populate fb ..."+request.getParameter("doj"));
 		fb.setQualification(DataUtility.getString(request.getParameter("qualification")));
 		fb.setEmail_id(DataUtility.getString(request.getParameter("loginid")));
 		fb.setMobile_No(DataUtility.getString(request.getParameter("mobileno")));
@@ -218,35 +220,27 @@ public class FacultyCtl extends BaseCtl {
 			try{
 			if(id > 0){
 				fm.update(fb);
+				ServletUtility.setSuccessMessage("Successfully Updated", request);
+
 			}else{
 			long pk = fm.add(fb);
+			ServletUtility.setSuccessMessage("Successfully Added", request);
+
 		//		bean.setId(pk);
 			}
 			ServletUtility.setBean(fb, request);
-			ServletUtility.setSuccessMessage("Faculty Successfully Register", request);
 			}catch(ApplicationException e){
 				log.error(e);
 				ServletUtility.handleException(e, request, response);
 				return ; 
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setBean(fb, request);
-				ServletUtility.setErrorMessage("Faculty already Exist", request);
+				ServletUtility.setErrorMessage("Given Email ID already Exist", request);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}/*else if (OP_DELETE.equalsIgnoreCase(op)) {
-			FacultyBean bean =(FacultyBean) populateBean(request);
-	
-			try {
-				model.delete(bean);
-				ServletUtility.redirect(ORSView.FACULTY_CTL, request, response);
-			} catch (ApplicationException e) {
-				log.error(e);
-				ServletUtility.handleException(e, request, response);
-				return;
-			}
-	}*/	else if (OP_RESET.equalsIgnoreCase(op)) {
+		}	else if (OP_RESET.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.FACULTY_CTL, request, response);
 				return ;
 			}			

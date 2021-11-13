@@ -18,11 +18,7 @@ public class ServletUtility {
 	  /**
      * Forward to given JSP/Servlet
      *
-     * @param page
-     * @param request
-     * @param response+9---+
-     * @throws IOException
-     * @throws ServletException
+     
      */
     public static void forward(String page, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
@@ -33,11 +29,8 @@ public class ServletUtility {
     /**
      * Forward to Layout View
      *
-     * @param page
-     * @param request
-     * @param response
-     * @throws IOException
-     * @throws ServletException
+     *  page
+     *  request
      */
     public static void forwardView(String page, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
@@ -51,11 +44,9 @@ public class ServletUtility {
     /**
      * Redirect to given JSP/Servlet
      *
-     * @param page
-     * @param request
-     * @param response
-     * @throws IOException
-     * @throws ServletException
+     *  page
+     *  request
+     *  response
      */
     public static void redirect(String page, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
@@ -65,11 +56,9 @@ public class ServletUtility {
     /**
      * Redirect to Application Error Handler Page
      *
-     * @param e
-     * @param request
-     * @param response
-     * @throws IOException
-     * @throws ServletException
+     *  e
+     *  request
+     *  response
      */
     public static void handleException(Exception e, HttpServletRequest request,
             HttpServletResponse response) throws IOException, ServletException {
@@ -92,9 +81,6 @@ public class ServletUtility {
     /**
      * Gets error message from request
      *
-     * @param property
-     * @param request
-     * @return
      */
     public static String getErrorMessage(HttpServletRequest request) {
 
@@ -109,9 +95,7 @@ public class ServletUtility {
     /**
      * returns all input error messages
      *
-     * @deprecated Use HTMLUtil method instead
-     * @param request
-     * @return
+     * 
      */
     public static String getErrorMessageHtml(HttpServletRequest request) {
 
@@ -134,9 +118,7 @@ public class ServletUtility {
     /**
      * Gets a message from request
      *
-     * @param property
-     * @param request
-     * @return
+     
      */
     public static String getMessage(String property, HttpServletRequest request) {
         String val = (String) request.getAttribute(property);
@@ -150,8 +132,8 @@ public class ServletUtility {
     /**
      * Sets error message to request
      *
-     * @param msg
-     * @param request
+     *  msg
+     *  request
      */
    public static void setErrorMessage(String msg, HttpServletRequest request) {
         request.setAttribute(BaseCtl.MSG_ERROR, msg);
@@ -160,8 +142,8 @@ public class ServletUtility {
     /**
      * Gets error message from request
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
     public static String getErrorMessage1(HttpServletRequest request) {
         String val = (String) request.getAttribute(BaseCtl.MSG_ERROR);
@@ -175,8 +157,8 @@ public class ServletUtility {
     /**
      * Sets success message to request
      *
-     * @param msg
-     * @param request
+     *  msg
+     *  request
      */
     public static void setSuccessMessage(String msg, HttpServletRequest request) {
         request.setAttribute(BaseCtl.MSG_SUCCESS, msg);
@@ -185,8 +167,8 @@ public class ServletUtility {
     /**
      * Gets success message from request
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
     public static String getSuccessMessage(HttpServletRequest request) {
         String val = (String) request.getAttribute(BaseCtl.MSG_SUCCESS);
@@ -204,8 +186,8 @@ public class ServletUtility {
     /**
      * Sets default Bean to request
      *
-     * @param bean
-     * @param request
+     *  bean
+     *  request
      */
     public static void setBean(BaseBean bean, HttpServletRequest request) {
         request.setAttribute("bean", bean);
@@ -218,8 +200,8 @@ public class ServletUtility {
     /**
      * Gets default bean from request
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
 
     public static BaseBean getBean(HttpServletRequest request) {
@@ -234,8 +216,8 @@ public class ServletUtility {
     /**
      * Returns logged in user role
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
 
 //  public static int getRole(HttpServletRequest request) {
@@ -250,8 +232,8 @@ public class ServletUtility {
   /**
      * gets Model from request scope
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
    /* public static BaseModel getModel(HttpServletRequest request) {
         return (BaseModel) request.getAttribute("model");
@@ -261,9 +243,9 @@ public class ServletUtility {
      * Get request parameter to display. If value is null then return empty
      * string
      *
-     * @param property
-     * @param request
-     * @return
+     *  property
+     *  request
+     * 
      */
 
     public static String getParameter(String property,
@@ -279,8 +261,8 @@ public class ServletUtility {
     /**
      * Sets default List to request
      *
-     * @param list
-     * @param request
+     *  list
+     *  request
      */
     public static void setList(List list, HttpServletRequest request) {
         request.setAttribute("list", list);
@@ -289,8 +271,8 @@ public class ServletUtility {
     /**
      * Gets default list from request
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
     public static List getList(HttpServletRequest request) {
         return (List) request.getAttribute("list");
@@ -299,8 +281,8 @@ public class ServletUtility {
     /**
      * Sets Page Number for List pages
      *
-     * @param pageNo
-     * @param request
+     *  pageNo
+     *  request
      */
     public static void setPageNo(int pageNo, HttpServletRequest request) {
         request.setAttribute("pageNo", pageNo);
@@ -309,8 +291,8 @@ public class ServletUtility {
     /**
      * Gets Page Number for List pages
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
     public static int getPageNo(HttpServletRequest request) {
         return (Integer) request.getAttribute("pageNo");
@@ -319,8 +301,8 @@ public class ServletUtility {
     /**
      * Sets Page Size for list pages
      *
-     * @param pageSize
-     * @param request
+     *  pageSize
+     *  request
      */
     public static void setPageSize(int pageSize, HttpServletRequest request) {
         request.setAttribute("pageSize", pageSize);
@@ -329,8 +311,8 @@ public class ServletUtility {
     /**
      * Gets Page Size for List pages
      *
-     * @param request
-     * @return
+     *  request
+     * 
      */
   public static int getPageSize(HttpServletRequest request) {
         return (Integer) request.getAttribute("pageSize");

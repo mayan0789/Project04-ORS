@@ -1,4 +1,4 @@
-<%@page import="in.co.rays.model.SubjectModel"%>
+.<%@page import="in.co.rays.model.SubjectModel"%>
 <%@page import="in.co.rays.model.CourseModel"%>
 <%@page import="java.beans.beancontext.BeanContext"%>
 <%@page import="in.co.rays.util.HTMLUtility"%>
@@ -65,10 +65,9 @@
 	</table>
 	<br>
 	
-	<table border="1" width="100%" align="center" cellpadding=6px cellspacing=".2">
+	<table border="1" width="100%"  cellpadding=5px cellspacing="0">
 		<tr>
-			<th><input type="checkbox" id="select_all" name ="select"> Select All.</th>
-			
+					<th> <input type="checkbox"  id="select_all" name="select">Select All </th>
 			<th>S.No.</th>
 			<th>Subject Name</th>
 			<th>Description</th>

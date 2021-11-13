@@ -19,14 +19,12 @@ import in.co.rays.util.JDBCDataSource;
  */
 public class MarksheetModel {
 
-
 	public int nextPK() throws DataBaseException {
 		// log.debug("Model nextPK Started");
 		Connection conn = null;
 		int pk = 0;
 		try {
 			conn = JDBCDataSource.getConnection();
-			System.out.println("Connection Succesfully Establish");
 
 			PreparedStatement pstmt = conn.prepareStatement("select max(ID) from ST_MARKSHEET");
 			ResultSet rs = pstmt.executeQuery();
@@ -49,8 +47,6 @@ public class MarksheetModel {
 	/**
 	 * Adds a Marksheet
 	 *
-	 * @param bean
-	 * @throws DatabaseException
 	 *
 	 */
 
@@ -60,18 +56,17 @@ public class MarksheetModel {
 
 		Connection conn = null;
 
-		// // get Student Name
+		// get Student Name
 		StudentModel sModel = new StudentModel();
 		StudentBean studentbean = sModel.findByPK(bean.getStudentId());
-		 bean.setName(studentbean.getFirst_Name() + " " + studentbean.getLast_Name());
+		System.out.println(bean.getStudentId());
+		bean.setName(studentbean.getFirst_Name() + " " + studentbean.getLast_Name());
 
-		
-		/*
-		 * MarksheetBean duplicateMarksheet = findByRollNo(bean.getRollNo()); 
-		 * 
-		 * if (duplicateMarksheet != null) { throw new
-		 * DuplicateRecordException("Roll Number already exists"); }
-		 */
+		MarksheetBean duplicateMarksheet = findByRollNo(bean.getRollNo());
+
+		if (duplicateMarksheet != null) {
+			throw new DuplicateRecordException("Roll Number already exists");
+		}
 
 		int pk = 0;
 		try {
@@ -114,8 +109,6 @@ public class MarksheetModel {
 	/**
 	 * Deletes a Marksheet
 	 *
-	 * @param bean
-	 * @throws DatabaseException
 	 */
 	public void delete(MarksheetBean bean) throws ApplicationException {
 		// log.debug("Model delete Started");
@@ -125,7 +118,6 @@ public class MarksheetModel {
 			conn.setAutoCommit(false); // Begin transaction
 			PreparedStatement pstmt = conn.prepareStatement("DELETE FROM ST_MARKSHEET WHERE ID=?");
 			pstmt.setLong(1, bean.getId());
-			System.out.println("Deleted MarkSheet");
 			pstmt.executeUpdate();
 			conn.commit(); // End transaction
 			pstmt.close();
@@ -151,10 +143,6 @@ public class MarksheetModel {
 	/**
 	 * Finds Marksheet by Roll No
 	 *
-	 * @param rollNo
-	 *            : get parameter
-	 * @return bean
-	 * @throws DuplicateRecordException
 	 */
 
 	public MarksheetBean findByRollNo(String rollNo) throws ApplicationException {
@@ -198,10 +186,6 @@ public class MarksheetModel {
 	/**
 	 * Finds Marksheet by PK
 	 *
-	 * @param pk
-	 *            : get parameter
-	 * @return bean
-	 * @throws DatabaseException
 	 */
 
 	public MarksheetBean findByPK(long pk) throws ApplicationException {
@@ -245,8 +229,6 @@ public class MarksheetModel {
 	/**
 	 * Updates a Marksheet
 	 *
-	 * @param bean
-	 * @throws DatabaseException
 	 */
 
 	public void update(MarksheetBean bean) throws ApplicationException, DuplicateRecordException {
@@ -269,7 +251,7 @@ public class MarksheetModel {
 																		// student
 																		// bean
 																		// check
-		//bean.setName(studentbean.getFirst_Name() + " " + studentbean.getLast_Name());
+		bean.setName(studentbean.getFirst_Name() + " " + studentbean.getLast_Name());
 
 		try {
 			conn = JDBCDataSource.getConnection();
@@ -311,9 +293,6 @@ public class MarksheetModel {
 	/**
 	 * Searches Marksheet
 	 *
-	 * @param bean
-	 *            : Search Parameters
-	 * @throws DatabaseException
 	 */
 
 	public List search(MarksheetBean bean) throws ApplicationException {
@@ -323,15 +302,6 @@ public class MarksheetModel {
 	/**
 	 * Searches Marksheet with pagination
 	 *
-	 * @return list : List of Marksheets
-	 * @param bean
-	 *            : Search Parameters
-	 * @param pageNo
-	 *            : Current Page No.
-	 * @param pageSize
-	 *            : Size of Page
-	 *
-	 * @throws DatabaseException
 	 */
 
 	public List search(MarksheetBean bean, int pageNo, int pageSize) throws ApplicationException {
@@ -341,7 +311,6 @@ public class MarksheetModel {
 		StringBuffer sql = new StringBuffer("select * from ST_MARKSHEET where true");
 
 		if (bean != null) {
-			System.out.println("service" + bean.getName());
 			if (bean.getId() > 0) {
 				sql.append(" AND id = " + bean.getId());
 			}
@@ -410,8 +379,6 @@ public class MarksheetModel {
 	/**
 	 * Gets List of Marksheet
 	 *
-	 * @return list : List of Marksheets
-	 * @throws DatabaseException
 	 */
 
 	public List list() throws ApplicationException {
@@ -421,12 +388,6 @@ public class MarksheetModel {
 	/**
 	 * get List of Marksheet with pagination
 	 *
-	 * @return list : List of Marksheets
-	 * @param pageNo
-	 *            : Current Page No.
-	 * @param pageSize
-	 *            : Size of Page
-	 * @throws DatabaseException
 	 */
 
 	public List list(int pageNo, int pageSize) throws ApplicationException {
@@ -480,12 +441,6 @@ public class MarksheetModel {
 	/**
 	 * get Merit List of Marksheet with pagination
 	 *
-	 * @return list : List of Marksheets
-	 * @param pageNo
-	 *            : Current Page No.
-	 * @param pageSize
-	 *            : Size of Page
-	 * @throws DatabaseException
 	 */
 
 	public List getMeritList(int pageNo, int pageSize) throws ApplicationException {

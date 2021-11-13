@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
 <meta charset="ISO-8859-1">
-<title>Header</title>
 </head>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -20,7 +20,7 @@
 			changeYear : true,
 			//yearRange: "c-20:c+0",
 			//yearRange : "1980:2025",
-		//maxDate:'0',
+		maxDate:'31/12/2003',
 		// minDate:0
 		yearRange : "-40:-18"
 		});
@@ -60,7 +60,7 @@
  %></td>
         <td rowspan="2">
             <h1 align="Right">
-                <img src="<%=ORSView.APP_CONTEXT%>/img/download.jpg" width="318"
+                <img src="<%=ORSView.APP_CONTEXT%>/img/rays.jpg" width="318"
                     height="90">
             </h1>
         </td>
@@ -101,7 +101,6 @@
         <a href="<%=ORSView.COLLEGE_LIST_CTL%>">College List</b></a> |
         <a href="<%=ORSView.ROLE_CTL%>">Add Role</b></a> |        
         <a href="<%=ORSView.ROLE_LIST_CTL%>">Role List</b></a> |
-        <br>
         <a href="<%=ORSView.STUDENT_CTL%>">Add Student</b></a> |
         <a href="<%=ORSView.STUDENT_LIST_CTL%>">Student List</b></a> |
         <a href="<%=ORSView.COURSE_CTL %>" >Add Course</b></a> |       
@@ -112,6 +111,7 @@
         <a href="<%=ORSView.FACULTY_LIST_CTL %>">Faculty List</b></a> |
         <a href="<%=ORSView.TIMETABLE_CTL %>" >Add TimeTable</b></a> |       
         <a href="<%=ORSView.TIMETABLE_LIST_CTL %>">TimeTable List</b></a> |
+        <a target = "blank" href="<%=ORSView.JAVA_DOC_VIEW%>"> Java Doc </a>
      
        <%
      		}
@@ -150,8 +150,7 @@
         <a href="<%=ORSView.STUDENT_CTL%>">Add Student</b></a> |
         <a href="<%=ORSView.STUDENT_LIST_CTL%>">Student List</b></a> |
         <a href="<%=ORSView.COURSE_LIST_CTL %>">Course List</b></a> |       
-        <a href="<%=ORSView.SUBJECT_CTL %>" >Add Subject</b></a> |   
-        <br>    
+        <a href="<%=ORSView.SUBJECT_CTL %>" >Add Subject</b></a> |       
         <a href="<%=ORSView.SUBJECT_LIST_CTL %>">Subject List</b></a> |       
         <a href="<%=ORSView.TIMETABLE_CTL %>" >Add TimeTable</b></a> |       
         <a href="<%=ORSView.TIMETABLE_LIST_CTL %>">TimeTable List</b></a> |

@@ -12,7 +12,8 @@ public class EmailBuilder {
      * @return
      */
     public static String getUserRegistrationMessage(HashMap<String, String> map) {
-        StringBuilder msg = new StringBuilder();
+     
+    	StringBuilder msg = new StringBuilder();
 
         msg.append("<HTML><BODY>");
         msg.append("Registration is successful for ORS Project SunilOS");

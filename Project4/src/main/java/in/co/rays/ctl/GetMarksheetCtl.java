@@ -36,6 +36,10 @@ public class GetMarksheetCtl extends BaseCtl{
             request.setAttribute("rollNo",
                     PropertyReader.getValue("error.require", "Roll Number"));
             pass = false;
+        }else  if (!DataValidator.isRollNo(request.getParameter("rollNo"))) {
+            request.setAttribute("rollNo",
+                    "Roll Number must be in alphanumeric format {00AA0000} ");
+            pass = false;
         }
 
       //  log.debug("GetMarksheetCTL Method validate Ended");
@@ -54,11 +58,11 @@ public class GetMarksheetCtl extends BaseCtl{
 
         bean.setRollNo(DataUtility.getString(request.getParameter("rollNo")));
 
-        bean.setName(DataUtility.getString(request.getParameter("name")));
+        //bean.setName(DataUtility.getString(request.getParameter("name")));
 
-        bean.setPhysics(DataUtility.getInt(request.getParameter("physics")));
+//        bean.setPhysics(DataUtility.getInt(request.getParameter("physics")));
 
-        bean.setChemistry(DataUtility.getInt(request.getParameter("chemistry")));
+  //      bean.setChemistry(DataUtility.getInt(request.getParameter("chemistry")));
 
         bean.setMaths(DataUtility.getInt(request.getParameter("maths")));
 
@@ -91,16 +95,15 @@ public class GetMarksheetCtl extends BaseCtl{
 
         MarksheetBean bean = populateBean(request);
 
-        int id = DataUtility.getInt(request.getParameter("id"));
 
         if (OP_GO.equalsIgnoreCase(op)) {
 
             try {
-                bean = model.findByRollNo(bean.getRollNo());
+                bean = model.findByRollNo(bean.getRollNo());	
                 if (bean != null) {
                     ServletUtility.setBean(bean, request);
                 } else {
-                    ServletUtility.setErrorMessage("RollNo Does Not exists",
+                    ServletUtility.setErrorMessage("Given Roll No. Does Not Exist",
                             request);
                 }
             } catch (ApplicationException e) {
@@ -109,6 +112,9 @@ public class GetMarksheetCtl extends BaseCtl{
                 return;
             }
 
+        }else if (OP_RESET.equalsIgnoreCase(op)) {
+        	ServletUtility.redirect(ORSView.GET_MARKSHEET_CTL, request, response);
+        	return;
         }
         ServletUtility.forward(getView(), request, response);
        // log.debug("MarksheetCtl Method doGet Ended");

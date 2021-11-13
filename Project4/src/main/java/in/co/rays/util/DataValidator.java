@@ -2,13 +2,16 @@ package in.co.rays.util;
 
 import java.util.Date;
 
+/**
+ * @author Mayank
+ *
+ */
 public class DataValidator {
 
 	  /**
      * Checks if value is Null
      * 
-     * @param val
-     * @return
+     * 
      */
     public static boolean isNull(String val) {
         if (val == null || val.trim().length() == 0) {
@@ -21,8 +24,7 @@ public class DataValidator {
     /**
      * Checks if value is NOT Null
      * 
-     * @param val
-     * @return
+     *
      */
     public static boolean isNotNull(String val) {
         return !isNull(val);
@@ -31,8 +33,7 @@ public class DataValidator {
     /**
      * Checks if value is an Integer
      * 
-     * @param val
-     * @return
+     
      */
 
     public static boolean isInteger(String val) {
@@ -57,8 +58,7 @@ public class DataValidator {
     /**
      * Checks if value is Long
      * 
-     * @param val
-     * @return
+    
      */
     public static boolean isLong(String val) {
         if (isNotNull(val)) {
@@ -77,8 +77,6 @@ public class DataValidator {
     /**
      * Checks if value is valid Email ID
      * 
-     * @param val
-     * @return
      */
     public static boolean isEmail(String val) {
 
@@ -99,8 +97,6 @@ public class DataValidator {
     /**
      * Checks if value is Date
      * 
-     * @param val
-     * @return
      */
     public static boolean isDate(String val) {
 
@@ -114,8 +110,6 @@ public class DataValidator {
     /**
      * Checks if value is Mobile Number
      * 
-     * @param val
-     * @return
      */
  
     public static boolean isMobileNo(String val){
@@ -135,8 +129,6 @@ public class DataValidator {
     
     /**
      * checks if value is Name
-     * @param val
-     * @return
      */
     public static boolean isName(String val){
     	
@@ -157,8 +149,6 @@ public class DataValidator {
    
     /**
      * check if value is Valid Name
-     * @param val
-     * @return
      */
     public static boolean isValidName(String val){
     	
@@ -181,8 +171,6 @@ public class DataValidator {
     
     /**
      * check if value is password
-     * @param val
-     * @return
      */
     public static boolean isPassword(String val){
     	
@@ -199,8 +187,6 @@ public class DataValidator {
     
     /**
      * check if value is Roll no
-     * @param val
-     * @return
      */
     public static boolean isRollNo(String val){
     	
@@ -218,8 +204,6 @@ public class DataValidator {
     
     /**
      * check if value is validate age
-     * @param val
-     * @return
      */
     public static boolean isvalidateAge(String val){
     
@@ -231,8 +215,24 @@ public class DataValidator {
     	if(age > 18 && isNotNull(val)){
     		return true;
     	}else{
-    		return false;							
+    		return false;						
+    		
     	}
+    }
+    public static boolean isAdd(String val) {
+
+        String emailreg = "^[_A-Za-z0-9-]$";
+
+        if (isNotNull(val)) {
+            try {
+                return val.matches(emailreg);
+            } catch (NumberFormatException e) {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
     }
     
     /**
@@ -246,9 +246,16 @@ public class DataValidator {
         System.out.println("Not Null 3" + isNotNull(null));*/
        // System.out.println("Not Name" + isName("pankaj"));
       //  String s = "a hajk     a mdlvkj   lkjlkgkl.    /lkjlkhklvjlk";
-        String a = "A           di    ty       a";
+        String a ="a     di    ty       a";
+       
+        String c = "amav";
+        System.out.println(isValidName(c));
+        System.out.println(isName(a));
+        
         String b = "Amitjhb54@"; 
         System.out.println(isPassword(b));
+        String g = "25/09/2000";
+        System.out.println(isvalidateAge(g));
         
         /*System.out.println("Is Int " + isInteger(null));
         System.out.println("Is Int " + isInteger("ABC1"));

@@ -152,7 +152,7 @@ public class SubjectListCtl extends BaseCtl {
 						ServletUtility.handleException(e, request, response);
 						return;
 					}
-					ServletUtility.setSuccessMessage("Subject Deleted Successfully ", request);
+					ServletUtility.setSuccessMessage("Record Deleted Successfully ", request);
 				}
 			} else {
 				ServletUtility.setErrorMessage("Select at least one record", request);
@@ -172,7 +172,7 @@ public class SubjectListCtl extends BaseCtl {
 		if (list == null || list.size() == 0 && !OP_DELETE.equalsIgnoreCase(op)) {
 			ServletUtility.setErrorMessage("No Record Found", request);
 		}
-ServletUtility.setBean(bean, request);
+        ServletUtility.setBean(bean, request);
 		ServletUtility.setList(list, request);
 		ServletUtility.setPageNo(pageNo, request);
 		ServletUtility.setPageSize(pageSize, request);

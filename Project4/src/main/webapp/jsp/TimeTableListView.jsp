@@ -10,6 +10,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
+ <script src="<%=ORSView.APP_CONTEXT %>/js/jquery.min.js"></script>
+<script src="<%=ORSView.APP_CONTEXT %>/js/Checkbox11.js"></script>
+
 <head>
 <link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
 <title> TimeTable List</title>
@@ -39,8 +42,8 @@ $(function() {
 		      beforeShowDay : DisableSunday,
 		    	changeMonth: true,
 		      	 changeYear: true,
-				  yearRange:'0:+2',
-				  dateFormat:'dd-mm-yy',
+		      	yearRange :'0:+2',
+				  dateFormat:'dd/mm/yy',
 				
 			//	  minDate : 0 
 		  	  });
@@ -99,11 +102,11 @@ $(function() {
 		</tr>
 	</table>
 <br>	
-	<table border="1" width="100%" align="center" cellpadding=6px cellspacing=".2">
-		<tr>
+	<table border="1" width="100%" align="center" cellpadding=5px cellspacing="0">
+		<tr align="center">
 		
-			<th width="5%"><input type="checkbox" id="select_all" name ="Select">Select All.</th>
-			<th>S.No.</th>	
+					<th> <input type="checkbox"  id="select_all" name="select">Select All </th>
+						<th>S.No.</th>	
 			<th>Course Name.</th>
 			<th>Subject Name.</th>
 <!-- 			<th>DESCRIPTION.</th> -->

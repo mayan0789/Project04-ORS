@@ -41,7 +41,7 @@ public class CourseCtl extends BaseCtl {
 				request.setAttribute("name", PropertyReader.getValue("error.require", "Course Name"));
 				 pass = false ;
 			}else if (!DataValidator.isName(request.getParameter("name"))) {
-				request.setAttribute("name", PropertyReader.getValue("error.name", "Invalid Course"));
+				request.setAttribute("name", PropertyReader.getValue("error.name", "Course Name"));
 				 pass = false ;
 			}
 			if (DataValidator.isNull(request.getParameter("duration"))) {
@@ -50,6 +50,9 @@ public class CourseCtl extends BaseCtl {
 			}
 			if (DataValidator.isNull(request.getParameter("description"))) {
 				request.setAttribute("description", PropertyReader.getValue("error.require", "Description"));
+				pass = false ;
+			}else if (!DataValidator.isName(request.getParameter("description"))) {
+				request.setAttribute("description", PropertyReader.getValue("error.name", "Description"));
 				pass = false ;
 			}
 
@@ -80,7 +83,6 @@ public class CourseCtl extends BaseCtl {
 		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			log.debug("Do get method od courseCtl started");
-			String op = DataUtility.getString(request.getParameter("operation"));
 			
 			// get Model
 			CourseModel model = new CourseModel();
@@ -118,12 +120,16 @@ public class CourseCtl extends BaseCtl {
 			try{
 				if(id>0){		
 						model.update(bean);
+						ServletUtility.setSuccessMessage("Successfully Updated", request);
+
 				}else{
-					 long pk = model.add(bean);
+					 //long pk
+					  model.add(bean);
+						ServletUtility.setSuccessMessage("Successfully Saved", request);
+
 				//		bean.setId(pk);
 				}
 					ServletUtility.setBean(bean, request);
-				ServletUtility.setSuccessMessage("Course is Successfully saved", request);
 			
 			}catch(ApplicationException e ){
 				e.printStackTrace();
@@ -135,18 +141,7 @@ public class CourseCtl extends BaseCtl {
 				ServletUtility.setErrorMessage("Course Name Already Exist", request);
 				
 			}		
-			}/*else if (OP_DELETE.equalsIgnoreCase(op)) {
-				CourseBean bean =(CourseBean) populateBean(request);
-				try {
-					model.delete(bean);;
-					ServletUtility.redirect(ORSView.COURSE_CTL, request, response);
-					return;
-				} catch (ApplicationException e) {
-					log.error(e);
-					ServletUtility.handleException(e, request, response);
-					return ;
-				}
-			}*/
+			}
 			else if (OP_CANCEL.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.COURSE_LIST_CTL, request, response);
 				return;

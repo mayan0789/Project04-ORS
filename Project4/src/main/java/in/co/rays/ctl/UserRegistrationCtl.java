@@ -50,11 +50,19 @@ public class UserRegistrationCtl extends BaseCtl {
                     PropertyReader.getValue("error.require", "First Name"));
             pass = false;
         }
+        else if(!DataValidator.isName(request.getParameter("firstName"))) {
+        	request.setAttribute("firstName","First Name must have Alphabets Only ");
+        	pass=false;
+        	        }
         if (DataValidator.isNull(request.getParameter("lastName"))) {
             request.setAttribute("lastName",
                     PropertyReader.getValue("error.require", "Last Name"));
             pass = false;
         }
+        else if(!DataValidator.isName(request.getParameter("lastName"))) {
+        	request.setAttribute("lastName","Last Name must have Alphabets Only ");
+        	pass=false;
+        	        }
         if (DataValidator.isNull(login)) {
             request.setAttribute("login",
                     PropertyReader.getValue("error.require", "Login Id"));
@@ -68,15 +76,34 @@ public class UserRegistrationCtl extends BaseCtl {
             request.setAttribute("password",
                     PropertyReader.getValue("error.require", "Password"));
             pass = false;
+        }else if (!DataValidator.isPassword(request.getParameter("password"))) {
+            request.setAttribute("password",
+                     "Password must contain alphanumeric and one special character");
+            pass = false;
         }
-//        if (DataValidator.isNull(request.getParameter("confirmPassword"))) {
-//            request.setAttribute("confirmPassword", PropertyReader.getValue(
-//                    "error.require", "Confirm Password"));
-//            pass = false;
-//        }
+       if (DataValidator.isNull(request.getParameter("confirmPassword"))) {
+           request.setAttribute("confirmPassword", PropertyReader.getValue(
+                   "error.require", "Confirm Password"));
+            pass = false;
+        }
+       else if (!DataValidator.isPassword(request.getParameter("confirmPassword"))) {
+           request.setAttribute("confirmPassword",
+                    "Password must contain alphanumeric and one special character");
+           pass = false;
+       }
         if (DataValidator.isNull(request.getParameter("gender"))) {
             request.setAttribute("gender",
                     PropertyReader.getValue("error.require", "Gender"));
+            pass = false;
+        }
+        if (DataValidator.isNull(request.getParameter("mobileno"))) {
+            request.setAttribute("mobileno",
+                    PropertyReader.getValue("error.require", "Mobile No."));
+            pass = false;
+        }
+        else if (!DataValidator.isMobileNo(request.getParameter("mobileno"))) {
+            request.setAttribute("mobileno",
+                    "Mobile No. must start from 6-9 and have 10 digits");
             pass = false;
         }
         if (DataValidator.isNull(dob)) {
@@ -88,15 +115,13 @@ public class UserRegistrationCtl extends BaseCtl {
                     PropertyReader.getValue("error.date", "Date Of Birth"));
             pass = false;
         }
-//        if (!request.getParameter("password").equals(
-//                request.getParameter("confirmPassword"))
-//                && !"".equals(request.getParameter("confirmPassword"))) {
-//            ServletUtility.setErrorMessage(
-//                    "Confirm  Password  should not be matched.", request);
-//
-//            pass = false;
-//        }
-//        log.debug("UserRegistrationCtl Method validate Ended");
+        else if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))   && !"".equals(request.getParameter("confirmPassword"))) {
+            request.setAttribute("confirmPassword",
+                    "Confirm  Password and Password Does Not Match");
+
+            pass = false;
+        }
+//       log.debug("UserRegistrationCtl Method validate Ended");
 
         return pass;
     }
@@ -124,6 +149,8 @@ public class UserRegistrationCtl extends BaseCtl {
 //        bean.setConfirmPassword(DataUtility.getString(request
 //                .getParameter("confirmPassword")));
 
+        bean.setMobile_No(DataUtility.getString(request.getParameter("mobileno")));
+        
         bean.setGender(DataUtility.getString(request.getParameter("gender")));
 
         bean.setDOB(DataUtility.getDate(request.getParameter("dob")));
@@ -150,21 +177,25 @@ public class UserRegistrationCtl extends BaseCtl {
      */
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in get method");
+        System.out.println("user regis ctl post method");
        // log.debug("UserRegistrationCtl Method doPost Started");
+        
         String op = DataUtility.getString(request.getParameter("operation"));
+        
+        
         // get model
         UserModel model = new UserModel();
-        int id = DataUtility.getInt(request.getParameter("id"));
+
         if (OP_SIGN_UP.equalsIgnoreCase(op)) {
             UserBean bean = (UserBean) populateBean(request);
             try {
                 int pk = model.add(bean);
+                     //  model.registerUser(bean);
                 bean.setId(pk);
+                System.out.println("onee time");
                 request.getSession().setAttribute("UserBean", bean);
-                ServletUtility.setSuccessMessage("Data is successfully saved", request);
-                ServletUtility.forward(getView(), request, response);
-                return;
+                ServletUtility.setSuccessMessage("Registered Successfully ", request);
+                
             } catch (ApplicationException e) {
            //     log.error(e);
                 ServletUtility.handleException(e, request, response);
@@ -172,12 +203,18 @@ public class UserRegistrationCtl extends BaseCtl {
             } catch (DuplicateRecordException e) {
          //       log.error(e);
                 ServletUtility.setBean(bean, request);
-                ServletUtility.setErrorMessage("Login id already exists",
+                ServletUtility.setErrorMessage("Login Id Already Exists",
                         request);
                 ServletUtility.forward(getView(), request, response);
             }
         }
-       // log.debug("UserRegistrationCtl Method doPost Ended");
+        else if (OP_RESET.equalsIgnoreCase(op)) {
+        	ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
+			return;	
+        }
+        ServletUtility.forward(getView(), request, response);
+
+        // log.debug("UserRegistrationCtl Method doPost Ended");
     }
 
     @Override

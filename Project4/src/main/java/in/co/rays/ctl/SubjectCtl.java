@@ -58,11 +58,14 @@ public class SubjectCtl extends BaseCtl {
 			request.setAttribute("name", PropertyReader.getValue("error.require", "Subject Name"));
 			pass = false;
 		} else if (!DataValidator.isName(request.getParameter("name"))) {
-			request.setAttribute("name", PropertyReader.getValue("error.name", "Invalid Subject"));
+			request.setAttribute("name", PropertyReader.getValue("error.name", "Subject Name"));
 			pass = false;
 		}
 		if (DataValidator.isNull(request.getParameter("description"))) {
 			request.setAttribute("description", PropertyReader.getValue("error.require", "Description"));
+			pass = false;
+		}else if (!DataValidator.isName(request.getParameter("description"))) {
+			request.setAttribute("description", PropertyReader.getValue("error.name", "Description"));
 			pass = false;
 		}
 
@@ -144,13 +147,16 @@ public class SubjectCtl extends BaseCtl {
 			try {
 				if (id > 0) {
 					model.update(bean);
+					ServletUtility.setSuccessMessage("Succesfully Updated ", request);
+
 				} else {
-					System.out.println("Subbject VIEw  okdm sd     " +bean.getCourse_Id()+"      "+bean.getSubject_Name());
-					long pk = model.add(bean);
+		//			long pk =
+							model.add(bean);
+					ServletUtility.setSuccessMessage("Succesfully Added ", request);
+
 					// bean.setId(pk);
 				}
 				ServletUtility.setBean(bean, request);
-				ServletUtility.setSuccessMessage(" Subject is Succesfully Added ", request);
 			} catch (ApplicationException e) {
 				log.error(e);
 				ServletUtility.handleException(e, request, response);

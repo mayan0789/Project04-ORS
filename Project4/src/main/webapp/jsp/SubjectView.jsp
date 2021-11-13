@@ -51,21 +51,21 @@
 	<table>
 	
 	<tr>
-	<th align="right">CourseName </th>
+	<th align="left">CourseName  <span style="color: red">*</span></th>
 	<td><%=HTMLUtility.getList("coursename", String.valueOf(bean.getCourse_Id()), courseId) %>
 	</td><td style="position: fixed"><font  color="red"><%=ServletUtility.getErrorMessage("coursename",request) %>
 	</font></td></tr>
 	
 	 <tr><th style="padding: 3px"></th></tr>    
 	
-	<tr><th align="right">Subject Name <span style="color: red">*</span>
-	<td><input type="text" name="name" placeholder="Enter Subject Name" size="25" value="<%=DataUtility.getStringData(bean.getSubject_Name())%>">
+	<tr><th align="left">Subject Name <span style="color: red">*</span>
+	<td><input type="text" name="name" placeholder="Enter Subject Name" size="24" value="<%=DataUtility.getStringData(bean.getSubject_Name())%>">
 	</td><td style="position: fixed"><font  color="red"><%=ServletUtility.getErrorMessage("name",request) %>
 	</font>	</td></th></tr>
 	
 	 <tr><th style="padding: 3px"></th></tr>    
-	<tr><th align="right">Description <span style="color: red">*</span>
-	<td><input type="text" name="description" placeholder="Enter Description" size="25" value="<%=DataUtility.getStringData(bean.getDescription())%>">
+	<tr><th align="left">Description <span style="color: red">*</span>
+	<td><input type="text" name="description" placeholder="Enter Description" size="24" value="<%=DataUtility.getStringData(bean.getDescription())%>">
 	</td><td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("description",request) %>
 	</font></td></th></tr>
 	

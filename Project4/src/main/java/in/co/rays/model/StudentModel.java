@@ -22,7 +22,6 @@ public class StudentModel {
 	/**
      * Find next PK of Student
      *
-     * @throws DatabaseException
      */
     public int nextPK() throws DataBaseException {
         //log.debug("Model nextPK Started");
@@ -52,8 +51,6 @@ public class StudentModel {
     /**
      * Add a Student
      *
-     * @param bean
-     * @throws DatabaseException
      *
      */
     public int add(StudentBean bean) throws ApplicationException,
@@ -64,15 +61,14 @@ public class StudentModel {
         // get College Name
         CollegeModel cModel = new CollegeModel();
         CollegeBean collegeBean = cModel.findByPK(bean.getCollege_Id());
-//      String cname=  bean.setCollege_Name(collegeBean.getName());
         String cname=collegeBean.getName();
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+cname);
+        System.out.println("Student Model Add CollegeName >>>>>>>>>>>>>>> "+cname);
 
         StudentBean duplicateName = findByEmailId(bean.getEmail());
         int pk = 0;
 
         if (duplicateName != null) {
-          //  throw new DuplicateRecordException ("Email already exists");
+            throw new DuplicateRecordException ("Email ID Already Exists");
         }
 
         try {
@@ -121,8 +117,6 @@ public class StudentModel {
     /**
      * Delete a Student
      *
-     * @param bean
-     * @throws DatabaseException
      */
     public void delete(StudentBean bean) throws ApplicationException {
        // log.debug("Model delete Started");
@@ -158,10 +152,6 @@ public class StudentModel {
     /**
      * Find User by Student
      *
-     * @param Email
-     *            : get parameter
-     * @return bean
-     * @throws DatabaseException
      */
 
     public StudentBean findByEmailId(String Email) throws ApplicationException {
@@ -207,10 +197,6 @@ public class StudentModel {
     /**
      * Find Student by PK
      *
-     * @param l
-     *            : get parameter
-     * @return bean
-     * @throws DatabaseException
      */
 
     public StudentBean findByPK(long l) throws ApplicationException {
@@ -254,8 +240,6 @@ public class StudentModel {
     /**
      * Update a Student
      *
-     * @param bean
-     * @throws DatabaseException
      */
 
     public void update(StudentBean bean) throws ApplicationException,
@@ -317,9 +301,6 @@ public class StudentModel {
     /**
      * Search Student
      *
-     * @param bean
-     *            : Search Parameters
-     * @throws DatabaseException
      */
 
     public List search(StudentBean bean) throws ApplicationException {
@@ -329,15 +310,6 @@ public class StudentModel {
     /**
      * Search Student with pagination
      *
-     * @return list : List of Students
-     * @param bean
-     *            : Search Parameters
-     * @param pageNo
-     *            : Current Page No.
-     * @param pageSize
-     *            : Size of Page
-     *
-     * @throws DatabaseException
      */
 
     public List search(StudentBean bean, int pageNo, int pageSize)
@@ -381,6 +353,8 @@ public class StudentModel {
             // sql.append(" limit " + pageNo + "," + pageSize);
         }
 
+		System.out.println("Student model search query " + sql);
+
         ArrayList list = new ArrayList();
         Connection conn = null;
         try {
@@ -420,8 +394,6 @@ public class StudentModel {
     /**
      * Get List of Student
      *
-     * @return list : List of Student
-     * @throws DatabaseException
      */
 
     public List list() throws ApplicationException {
@@ -431,12 +403,6 @@ public class StudentModel {
     /**
      * Get List of Student with pagination
      *
-     * @return list : List of Student
-     * @param pageNo
-     *            : Current Page No.
-     * @param pageSize
-     *            : Size of Page
-     * @throws DatabaseException
      */
 
     public List list(int pageNo, int pageSize) throws ApplicationException {

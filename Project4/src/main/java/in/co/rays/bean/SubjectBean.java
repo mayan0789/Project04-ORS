@@ -43,12 +43,10 @@ public class SubjectBean extends BaseBean {
 	}
 	public String getkey() {
 		return id+"";
-		// TODO Auto-generated method stub
 		
 	}
 	public String getvalue() {
 		return Subject_Name;
-		// TODO Auto-generated method stub
 		
 	}
 	

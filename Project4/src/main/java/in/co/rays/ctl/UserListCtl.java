@@ -33,6 +33,19 @@ public class UserListCtl extends BaseCtl {
 	private static final long serialVersionUID = 1L;
 
 	@Override
+	protected void preload(HttpServletRequest request) {
+		UserModel mdoel = new UserModel();
+		try {
+			List cList = mdoel.list();
+			request.setAttribute("loglist", cList);
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
+		System.out.println(" User list ctl preload working");
+
+	}
+
+	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		UserBean bean = new UserBean();
 
@@ -40,7 +53,7 @@ public class UserListCtl extends BaseCtl {
 
 		bean.setLast_Name(DataUtility.getString(request.getParameter("lastName")));
 
-		bean.setLogin(DataUtility.getString(request.getParameter("login")));
+		bean.setId(DataUtility.getLong(request.getParameter("login")));
 
 		return bean;
 	}
@@ -52,13 +65,13 @@ public class UserListCtl extends BaseCtl {
 			throws ServletException, IOException {
 		// log.debug("UserListCtl doGet Start");
 		List list = null;
+		
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
+		
 		UserBean bean = (UserBean) populateBean(request);
-		String op = DataUtility.getString(request.getParameter("operation"));
-		// get the selected checkbox ids array for delete list
-		String[] ids = request.getParameterValues("ids");
-		UserModel model = new UserModel();
+		
+				UserModel model = new UserModel();
 		try {
 			list = model.search(bean, pageNo, pageSize);
 
@@ -93,14 +106,16 @@ public class UserListCtl extends BaseCtl {
 
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
+		
 		UserBean bean = (UserBean) populateBean(request);
 		String op = DataUtility.getString(request.getParameter("operation"));
+		
 		// get the selected checkbox ids array for delete list
 		String[] ids = request.getParameterValues("ids");
 		UserModel model = new UserModel();
 		try {
 
-			if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
+			if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op) || OP_DELETE.equalsIgnoreCase(op))  {
 
 				if (OP_SEARCH.equalsIgnoreCase(op)) {
 					pageNo = 1;
@@ -108,29 +123,36 @@ public class UserListCtl extends BaseCtl {
 					pageNo++;
 				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
 					pageNo--;
+				}else if (OP_DELETE.equalsIgnoreCase(op)) {
+					pageNo = 1;
+					if (ids != null && ids.length > 0) {
+						UserBean deletebean = new UserBean();
+						for (String id : ids) {
+							deletebean.setId(DataUtility.getInt(id));
+							model.delete(deletebean);
+							ServletUtility.setSuccessMessage("Record Deleted Successfully", request);
+
+						}
+					} else {
+						ServletUtility.setErrorMessage("Select at least one record", request);
+					}
 				}
+
 
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.USER_CTL, request, response);
 				return;
-			} else if (OP_DELETE.equalsIgnoreCase(op)) {
-				pageNo = 1;
-				if (ids != null && ids.length > 0) {
-					UserBean deletebean = new UserBean();
-					for (String id : ids) {
-						deletebean.setId(DataUtility.getInt(id));
-						model.delete(deletebean);
-					}
-				} else {
-					ServletUtility.setErrorMessage("Select at least one record", request);
-				}
-			}
+			} else if (OP_RESET.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
+				return;
+			} 
 			list = model.search(bean, pageNo, pageSize);
-			System.out.println("==============>"+list);
+			System.out.println(" USer lis==============>" + list);
 			ServletUtility.setList(list, request);
 			if (list == null || list.size() == 0) {
 				ServletUtility.setErrorMessage("No record found ", request);
 			}
+			ServletUtility.setBean(bean, request);
 			ServletUtility.setList(list, request);
 			ServletUtility.setPageNo(pageNo, request);
 			ServletUtility.setPageSize(pageSize, request);

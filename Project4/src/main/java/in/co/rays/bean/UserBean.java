@@ -8,6 +8,11 @@ import java.util.Date;
  */
 public class UserBean extends BaseBean {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String First_Name;
 	private String Last_Name;
 	private String Login;
@@ -95,7 +100,7 @@ public class UserBean extends BaseBean {
 
 	public String getvalue() {
 		// TODO Auto-generated method stub
-		return First_Name;
+		return Login;
 	}
 
 	

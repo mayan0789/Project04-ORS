@@ -4,6 +4,10 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <html>
+<head> 
+<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
+<title> Marksheet Merit List</title></head>
+
 <body>
     <%@include file="Header.jsp"%>
     <center>
@@ -11,10 +15,11 @@
 
         <form action="<%=ORSView.MARKSHEET_MERIT_LIST_CTL%>" method="POST">
             <br>
-            <table border="1" width="100%">
+            <table border="1" width="100%" cellspacing = "0" cellpadding="10">
+            
                 <tr>
 
-                    <th>ID</th>
+                    <th>Rank</th>
                     <th>Roll No</th>
                     <th>Name</th>
                     <th>Physics</th>
@@ -22,9 +27,9 @@
                     <th>Maths</th>
 
                 </tr>
-                <tr>
-                    <td colspan="8"><font color="red"><%=ServletUtility.getErrorMessage(request)%></font></td>
-                </tr>
+            
+               
+               
                 <%
                     int pageNo = ServletUtility.getPageNo(request);
                     int pageSize = ServletUtility.getPageSize(request);
@@ -37,7 +42,7 @@
 
                         MarksheetBean bean = it.next();
                 %>
-                <tr>
+                <tr align="center">
 
                     <td><%=index++%></td>
                     <td><%=bean.getRollNo()%></td>
@@ -58,6 +63,7 @@
                         value="<%=MarksheetMeritListCtl.OP_BACK%>"></td>
                 </tr>
             </table>
+            <br><br><br><br><br><br>
             <input type="hidden" name="pageNo" value="<%=pageNo%>"> <input
                 type="hidden" name="pageSize" value="<%=pageSize%>">
         </form>

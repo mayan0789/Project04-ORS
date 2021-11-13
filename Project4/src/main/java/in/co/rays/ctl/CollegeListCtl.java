@@ -34,10 +34,23 @@ public class CollegeListCtl extends BaseCtl {
 
 
 	@Override
+	protected void preload(HttpServletRequest request) {
+		CollegeModel mdoel = new CollegeModel();
+		
+		try {
+			List cList = mdoel.list();
+			System.out.println(cList.isEmpty());
+			request.setAttribute("namee", cList);
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@Override
     protected BaseBean populateBean(HttpServletRequest request) {
         CollegeBean bean = new CollegeBean();
 
-        bean.setName(DataUtility.getString(request.getParameter("name")));
+        bean.setId(DataUtility.getLong(request.getParameter("name")));
         bean.setCity(DataUtility.getString(request.getParameter("city")));
 
         return bean;
@@ -101,31 +114,51 @@ public class CollegeListCtl extends BaseCtl {
 
         CollegeModel model = new CollegeModel();
 
-        try {
+        String[] ids = request.getParameterValues("ids");
+		try {
 
-            if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op)
-                    || "Previous".equalsIgnoreCase(op)) {
+			if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
 
-                if (OP_SEARCH.equalsIgnoreCase(op)) {
-                    pageNo = 1;
-                } else if (OP_NEXT.equalsIgnoreCase(op)) {
-                    pageNo++;
-                } else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
-                    pageNo--;
-                }
+				if (OP_SEARCH.equalsIgnoreCase(op)) {
+					pageNo = 1;
+				} else if (OP_NEXT.equalsIgnoreCase(op)) {
+					pageNo++;
+				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
+					pageNo--;
+				}
 
-            }
-            list = model.search(bean, pageNo, pageSize);
-            ServletUtility.setList(list, request);
-            if (list == null || list.size() == 0) {
-                ServletUtility.setErrorMessage("No record found ", request);
-            }
-            ServletUtility.setList(list, request);
+			} else if (OP_NEW.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.COLLEGE_CTL, request, response);
+				return;
+			} else if (OP_RESET.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, request, response);
+				return;
+			} else if (OP_DELETE.equalsIgnoreCase(op)) {
+				pageNo = 1;
+				if (ids != null && ids.length > 0) {
+					CollegeBean deletebean = new CollegeBean();
+					for (String id : ids) {
+						deletebean.setId(DataUtility.getInt(id));
+						model.delete(deletebean);
+						ServletUtility.setSuccessMessage("Record Deleted Successfully", request);
 
-            ServletUtility.setPageNo(pageNo, request);
-            ServletUtility.setPageSize(pageSize, request);
-            ServletUtility.forward(getView(), request, response);
+					}
+				} else {
+					ServletUtility.setErrorMessage("Select at least one record", request);
+				}
+			}
+			list = model.search(bean, pageNo, pageSize);
+			ServletUtility.setList(list, request);
+			if (list == null || list.size() == 0) {
+				ServletUtility.setErrorMessage("No Record Found ", request);
+			}
+			ServletUtility.setBean(bean, request);
+			ServletUtility.setList(list, request);
+			ServletUtility.setPageNo(pageNo, request);
+			ServletUtility.setPageSize(pageSize, request);
+			ServletUtility.forward(getView(), request, response);
 
+       
         } catch (ApplicationException e) {
            // log.error(e);
             ServletUtility.handleException(e, request, response);

@@ -22,7 +22,6 @@ public class RoleModel {
 	/**
 	 * Find next PK of Role
 	 *
-	 * @throws DatabaseException
 	 */
 	public int nextPK() throws DataBaseException {
 		// log.debug("Model nextPK Started");
@@ -50,9 +49,6 @@ public class RoleModel {
 	/**
 	 * Add a Role
 	 *
-	 * @param bean
-	 * @throws RecordNotFoundException
-	 * @throws DatabaseException
 	 *
 	 */
 
@@ -107,9 +103,6 @@ public class RoleModel {
 	/**
 	 * Delete a Role
 	 *
-	 * @param bean
-	 * @throws ApplicationException
-	 * @throws DatabaseException
 	 */
 	public void delete(RoleBean bean) throws ApplicationException {
 		// log.debug("Model deleted started");
@@ -142,8 +135,6 @@ public class RoleModel {
 	/**
 	 * Update a Role
 	 *
-	 * @param bean
-	 * @throws DatabaseException
 	 */
 	public void update(RoleBean bean) throws ApplicationException {
 		// log.debug("Model Updated Started");
@@ -187,11 +178,6 @@ public class RoleModel {
 	/**
 	 * Find Role by PK
 	 *
-	 * @param pk
-	 *            : get parameter
-	 * @return bean
-	 * @throws ApplicationException
-	 * @throws DatabaseException
 	 */
 	public RoleBean findByPK(long l) throws ApplicationException {
 		// log.debug("Model FindByPK Started");
@@ -201,12 +187,9 @@ public class RoleModel {
 		Connection conn = null;
 		try {
 			conn = JDBCDataSource.getConnection();
-			System.out.println("connection");
 			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ST_ROLE WHERE ID=?");
-			System.out.println("query");
 			pstmt.setLong(1, l);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("resultSet");
 			while (rs.next()) {
 				bean = new RoleBean();
 				bean.setId(rs.getLong(1));
@@ -234,11 +217,6 @@ public class RoleModel {
 	/**
 	 * Find FindByName User by Role
 	 *
-	 * @param name
-	 *            : get parameter
-	 * @return bean
-	 * @throws RecordNotFoundException
-	 * @throws DatabaseException
 	 */
 	public RoleBean findByName(String Name) {
 		// log.debug("Model FindBY EmailId Started");
@@ -276,9 +254,6 @@ public class RoleModel {
 	/**
 	 * Search Role
 	 *
-	 * @param bean
-	 *            : Search Parameters
-	 * @throws DatabaseException
 	 */
 	public List search(RoleBean bean) throws ApplicationException {
 		return search(bean, 0, 0);
@@ -287,15 +262,6 @@ public class RoleModel {
 	/**
 	 * Search Role with pagination
 	 *
-	 * @return list : List of Roles
-	 * @param bean
-	 *            : Search Parameters
-	 * @param pageNo
-	 *            : Current Page No.
-	 * @param pageSize
-	 *            : Size of Page
-	 *
-	 * @throws DatabaseException
 	 */
 
 	public List search(RoleBean bean, int pageNo, int pageSize) {
@@ -355,12 +321,6 @@ public class RoleModel {
 	/**
 	 * Get List of Role with pagination
 	 *
-	 * @return list : List of Role
-	 * @param pageNo
-	 *            : Current Page No.
-	 * @param pageSize
-	 *            : Size of Page
-	 * @throws DatabaseException
 	 */
 	public List list() throws ApplicationException{
 		return list(0,0);

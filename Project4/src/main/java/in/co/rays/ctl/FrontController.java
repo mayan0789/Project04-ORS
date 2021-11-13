@@ -34,17 +34,18 @@ public class FrontController implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
+		
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("user") == null) {
-			request.setAttribute("message", " Your Session has been Expired... Please Login Again");
+			
+			request.setAttribute("fcmessage", " Your Session has been Expired... Please Login Again");
 
 			// Set the URI
 			String str = request.getRequestURI();
-			session.setAttribute("URI", str);
+			session.setAttribute("uri", str);
 
 			ServletUtility.forward(ORSView.LOGIN_VIEW, request, response);
-			return;
 		} else {
 			chain.doFilter(req, resp);
 		}

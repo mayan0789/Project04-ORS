@@ -1,8 +1,17 @@
 package in.co.rays.exception;
 
+/**
+ * @author Mayank
+ *
+ */
 public class ApplicationException extends Exception {
 
-	 public ApplicationException(String Msg){
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ApplicationException(String Msg){
 		 super(Msg);
 	 }
 }

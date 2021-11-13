@@ -11,7 +11,7 @@
 <html>
 <head>
 <link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
-<title> TimeTable Register Page</title>
+<title> TimeTable Register</title>
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -28,7 +28,7 @@
 	   return [false];
 	  }else
 	  {
-		  return [true];
+	  return [true];
 	  }
   }
   
@@ -81,48 +81,48 @@
 
 <table>
 	<tr>
-	<th align="right">Course <span style="color: red">*</span></th>
+	<th align="left">Course <span style="color: red">*</span></th>
 	<td><%=HTMLUtility.getList("courseId", String.valueOf(bean.getCourse_Id()), courseList) %></td>
-	<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("courseId",request) %></font> 
+	<td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("courseId",request) %></font> 
 	</td></tr>
 	
  <tr><th style="padding: 3px"></th></tr>   
 	
-	<tr><th align="right">Subject <span style="color: red">*</span></th>
+	<tr><th align="left">Subject <span style="color: red">*</span></th>
 	<td><%=HTMLUtility.getList("subjectId", String.valueOf(bean.getSubject_Id()), subjectList) %></td>
-	<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("subjectId",request) %></font> 
+	<td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("subjectId",request) %></font> 
 	</td></tr>
 	
  <tr><th style="padding: 3px"></th></tr>   
 	
 	<tr>
-	<th align="right">Semester<span style="color: red">*</span></th>
+	<th align="left">Semester <span style="color: red">*</span></th>
 	<td><%
 		LinkedHashMap<String , String> map = new LinkedHashMap< String , String>();
 		map.put("1st","1st");
-		map.put("2st","2st");
-		map.put("3st","3st");
-		map.put("4st","4st");
-		map.put("5st","5st");
-		map.put("6st","6st");
-		map.put("7st","7st");
-		map.put("8st","8st");
+		map.put("2nd","2nd");
+		map.put("3rd","3rd");
+		map.put("4th","4th");
+		map.put("5th","5th");
+		map.put("6th","6th");
+		map.put("7th","7th");
+		map.put("8th","8th");
 	
-		String htmlList = HTMLUtility.getList("semester", "bean.getSemester()", map);
+		String htmlList = HTMLUtility.getList("semester", String.valueOf(bean.getSemester()), map);
 	%>
 	<%=htmlList %>
 	</td>
-	<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("semester",request) %></font> 
+	<td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("semester",request) %></font> 
 	</td></tr>
 	
  <tr><th style="padding: 3px"></th></tr>   
-	<tr><th align="right">Exam Date <span style="color: red">*</span></th>
-	<td> <input type="text" readonly="readonly" id="udate5" size="24" placeholder="		Select Date" name="ExDate" value="<%=DataUtility.getDateString(bean.getExam_Date()) %>">
-	<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("ExDate",request) %></font> 
+	<tr><th align="left">Exam Date <span style="color: red">*</span></th>
+	<td> <input type="text" readonly="readonly" id="udate5" size="24" placeholder="	Select Date" name="ExDate" value="<%=DataUtility.getDateString(bean.getExam_Date()) %>">
+	<td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("ExDate",request) %></font> 
 	</td></tr>
 	
  <tr><th style="padding: 3px"></th></tr>   
-	<tr><th align="right">Exam Time <span style="color: red">*</span></span></th>
+	<tr><th align="left">Exam Time <span style="color: red">*</span></span></th>
 	<td>
 	<%
 		LinkedHashMap<String , String > map1 = new LinkedHashMap<String  ,String >();
@@ -134,7 +134,7 @@
 	%>
 	<%=htmlList1 %>
 	</td>
-	<td style="position: fixed;"><font color="red"><%=ServletUtility.getErrorMessage("ExTime",request) %></font> 
+	<td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("ExTime",request) %></font> 
 	</td></tr>
 	
 <%-- 	<tr><th align = "right">Description <span style="color: red">*</span></th>

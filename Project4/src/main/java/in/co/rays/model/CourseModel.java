@@ -24,8 +24,6 @@ public class CourseModel {
 	/**
 	 * Find next PK of Course.
 	 *
-	 * @return the integer
-	 * @throws DatabaseException the database exception
 	 */
 
 	public int nextPk() throws DataBaseException {
@@ -55,10 +53,6 @@ public class CourseModel {
 	/**
 	 * Add a Course.
 	 *
-	 * @param bean the bean
-	 * @return the int
-	 * @throws ApplicationException the application exception
-	 * @throws DuplicateRecordException the duplicate record exception
 	 */
 
 	public int add(CourseBean bean) throws ApplicationException, DuplicateRecordException {
@@ -107,8 +101,6 @@ public class CourseModel {
 	/**
 	 * Delete a Course.
 	 *
-	 * @param bean the bean
-	 * @throws ApplicationException the application exception
 	 */
 
 	public void delete(CourseBean bean) throws ApplicationException {
@@ -140,9 +132,6 @@ public class CourseModel {
 	/**
 	 * Update a Course.
 	 *
-	 * @param bean the bean
-	 * @throws ApplicationException the application exception
-	 * @throws DuplicateRecordException the duplicate record exception
 	 */
 
 	public void update(CourseBean bean) throws ApplicationException, DuplicateRecordException {
@@ -188,9 +177,6 @@ public class CourseModel {
 	/**
 	 * Find User by Course.
 	 *
-	 * @param name            : get parameter
-	 * @return bean
-	 * @throws ApplicationException the application exception
 	 */
 
 	public CourseBean findByName(String name) throws ApplicationException {
@@ -229,9 +215,6 @@ public class CourseModel {
 	/**
 	 * Find User by Course.
 	 *
-	 * @param pk            : get parameter
-	 * @return bean
-	 * @throws ApplicationException the application exception
 	 */
 
 	public CourseBean findByPk(long pk) throws ApplicationException {
@@ -271,9 +254,6 @@ public class CourseModel {
 	/**
 	 * Search Course.
 	 *
-	 * @param bean            : Search Parameters
-	 * @return the list
-	 * @throws ApplicationException the application exception
 	 */
 
 	public List search (CourseBean bean) throws ApplicationException{
@@ -283,11 +263,6 @@ public class CourseModel {
 	/**
 	 * Search Course with pagination.
 	 *
-	 * @param bean            : Search Parameters
-	 * @param pageNo            : Current Page No.
-	 * @param pageSize            : Size of Page
-	 * @return list : List of Users
-	 * @throws ApplicationException the application exception
 	 */
 	
 	public List search(CourseBean bean, int pageNo, int pageSize) throws ApplicationException {
@@ -352,8 +327,6 @@ public class CourseModel {
 	/**
 	 * Get List of Course.
 	 *
-	 * @return list : List of Course
-	 * @throws ApplicationException the application exception
 	 */
 	
 	public List list () throws ApplicationException{
@@ -363,10 +336,6 @@ public class CourseModel {
 	/**
 	 * Get List of Course with pagination.
 	 *
-	 * @param pageNo            : Current Page No.
-	 * @param pageSize            : Size of Page
-	 * @return list : List of Course
-	 * @throws ApplicationException the application exception
 	 */
 	
 	public List list(int pageNo, int pageSize) throws ApplicationException {

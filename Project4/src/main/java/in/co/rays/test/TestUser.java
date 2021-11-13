@@ -24,13 +24,13 @@ public class TestUser {
 		// testUpdate();
 		// testFindByPK();
 	// testFindByLogin();
-		// testSearch();
+	//	 testSearch();
 		// testGetRoles();
 		// testList();
 		// testAuthenticate();
 		// testRegisterUser();
-		 testchangePassword();
-		// testforgetPassword();
+		 //testchangePassword();
+		 testforgetPassword();
 		// testresetPassword();
 
 	}
@@ -38,8 +38,6 @@ public class TestUser {
 	/**
 	 * Tests add a User
 	 * 
-	 * @throws ParseException
-	 * @throws DuplicateRecordException
 	 */
 	public static void testAdd() throws ParseException, DuplicateRecordException {
 
@@ -94,7 +92,6 @@ public class TestUser {
 
 	/**
 	 * Tests update a User
-	 * @throws ParseException 
 	 */
 	public static void testUpdate() throws ParseException {
 
@@ -210,7 +207,7 @@ public class TestUser {
 		try {
 			UserBean bean = new UserBean();
 			List list = new ArrayList();
-			bean.setFirst_Name("Trigno");
+			bean.setFirst_Name("Suman");
 			list = model.search(bean, 0, 0);
 			if (list.size() < 0) {
 				System.out.println("Test Serach fail");
@@ -238,7 +235,7 @@ public class TestUser {
 	 * Tests get List.
 	 */
 	public static void testList() {
-
+System.out.println("Stage1 ");
 		try {
 			UserBean bean = new UserBean();
 			List list = new ArrayList();
@@ -248,6 +245,7 @@ public class TestUser {
 			}
 			Iterator it = list.iterator();
 			while (it.hasNext()) {
+				System.out.println("Stage2 ");
 				bean = (UserBean) it.next();
 				System.out.println(bean.getId());
 				System.out.println(bean.getFirst_Name());
@@ -274,7 +272,6 @@ public class TestUser {
 	/**
 	 * Tests authenticate User.
 	 * 
-	 * @throws Exception
 	 */
 	public static void testAuthenticate() throws Exception {
 
@@ -298,7 +295,6 @@ public class TestUser {
 	/**
 	 * Tests add a User register
 	 * 
-	 * @throws ParseException
 	 */
 
 	public static void testRegisterUser() throws ParseException {
@@ -335,7 +331,6 @@ public class TestUser {
 	/**
 	 * Tests changepassword
 	 * 
-	 * @throws ParseException
 	 */
 	public static void testchangePassword() {
 
@@ -361,11 +356,10 @@ public class TestUser {
 	/**
 	 * Tests fogetPassword
 	 * 
-	 * @throws ParseException
 	 */
 	public static void testforgetPassword() {
 		try {
-			boolean b = model.forgetPassword("ranjitchoudhary20@gmail.com");
+			boolean b = model.forgetPassword("ranj@gmail.com");
 
 			System.out.println("Suucess : Test Forget Password Success");
 
@@ -379,7 +373,6 @@ public class TestUser {
 	/**
 	 * Tests resetPassword
 	 * 
-	 * @throws ParseException
 	 */
 	public static void testresetPassword() {
 		UserBean bean = new UserBean();

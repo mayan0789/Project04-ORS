@@ -1,18 +1,15 @@
 <%@page import="in.co.rays.ctl.ORSView"%>
 <html>
-<body bgcolor="cyan">
-<br>
-<br>
-        <h1 align="Center">
-            <font size="10px" color="maroon"> Get Online Result </font>
-            <img  src="">
-        </h1>
-        <br> <br>
-        <center>
-         <a href="<%=ORSView.WELCOME_CTL%>" >
-         <b>Click Here to Proceed </b></a>
- </center>
-        
+<body>
+
+    <h1 align="Center">
+        <img src="img/rays.jpg" width="318" height="127" border="0">
+    </h1>
+
+    <h1 align="Center">
+        <font size="10px" color="red">
+        &emsp;  <a href="<%=ORSView.WELCOME_CTL%>">Online Result System</a></font> <br> <br>
+    </h1>
 
 </body>
 </html>

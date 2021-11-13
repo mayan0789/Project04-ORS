@@ -41,12 +41,18 @@ public class RoleCtl extends BaseCtl{
 	            request.setAttribute("name",
 	                    PropertyReader.getValue("error.require", "Name"));
 	            pass = false;
+	        } else if (!DataValidator.isName(request.getParameter("name"))) {
+	        	request.setAttribute("name", "Name must have Charcters only");
+	        pass = false;
 	        }
 
 	        if (DataValidator.isNull(request.getParameter("description"))) {
 	            request.setAttribute("description",
 	                    PropertyReader.getValue("error.require", "Description"));
 	            pass = false;
+	        }else if (!DataValidator.isName(request.getParameter("description"))) {
+	        	request.setAttribute("description", "Description must have Charcters only");
+	        pass = false;
 	        }
 
 	     //   log.debug("RoleCtl Method validate Ended");
@@ -111,7 +117,7 @@ public class RoleCtl extends BaseCtl{
 	            HttpServletResponse response) throws ServletException, IOException {
 	      //  log.debug("RoleCtl Method doGet Started");
 
-	        System.out.println("In do get");
+	        System.out.println("In do postt");
 
 	        String op = DataUtility.getString(request.getParameter("operation"));
 
@@ -120,47 +126,39 @@ public class RoleCtl extends BaseCtl{
 
 	        int id = DataUtility.getInt(request.getParameter("id"));
 
-	        if (OP_SAVE.equalsIgnoreCase(op)) {
+	        if (OP_SAVE.equalsIgnoreCase(op) || OP_UPDATE.equalsIgnoreCase(op)) {
 
 	            RoleBean bean = (RoleBean) populateBean(request);
 
 	            try {
 	                if (id > 0) {
 	                    model.update(bean);
+	                    ServletUtility.setSuccessMessage("Successfully Updated",
+		                        request);
+
 	                } else {
-	                    int pk = model.add(bean);
-	                    bean.setId(pk);
+	                    //int pk 
+	                	model.add(bean);
+	                	 ServletUtility.setSuccessMessage("Successfully Saved",
+	 	                        request);
+
+	                    //bean.setId(pk);
 	                }
 
 	                ServletUtility.setBean(bean, request);
-	                ServletUtility.setSuccessMessage("Data is successfully saved",
-	                        request);
-
+	                
 	            } catch (ApplicationException e) {
 	              //  log.error(e);
 	                ServletUtility.handleException(e, request, response);
 	                return;
 	            } catch (DuplicateRecordException e) {
 	                ServletUtility.setBean(bean, request);
-	                ServletUtility.setErrorMessage("Role already exists", request);
+	                ServletUtility.setErrorMessage("Role Already Exists", request);
 	            } catch (RecordNotFoundException e) {
 									e.printStackTrace();
 				}
 
-	        } else if (OP_DELETE.equalsIgnoreCase(op)) {
-
-	            RoleBean bean = (RoleBean) populateBean(request);
-	            try {
-	                model.delete(bean);
-	                ServletUtility.redirect(ORSView.ROLE_LIST_CTL, request,
-	                        response);
-	                return;
-	            } catch (ApplicationException e) {
-	               // log.error(e);
-	                ServletUtility.handleException(e, request, response);
-	                return;
-	            }
-
+	        
 	        } else if (OP_CANCEL.equalsIgnoreCase(op)) {
 
 	            ServletUtility.redirect(ORSView.ROLE_LIST_CTL, request, response);

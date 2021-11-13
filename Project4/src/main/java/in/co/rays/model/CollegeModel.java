@@ -22,7 +22,6 @@ public class CollegeModel {
 	/**
      * Find next PK of College
      *
-     * @throws DatabaseException
      */
     public int nextPK() throws DataBaseException {
       //  log.debug("Model nextPK Started");
@@ -52,8 +51,6 @@ public class CollegeModel {
     /**
      * Add a College
      *
-     * @param bean
-     * @throws DatabaseException
      *
      */
     public int add(CollegeBean bean) throws ApplicationException,
@@ -110,8 +107,6 @@ public class CollegeModel {
     /**
      * Delete a College
      *
-     * @param bean
-     * @throws DatabaseException
      */
     public void delete(CollegeBean bean) throws ApplicationException {
        // log.debug("Model delete Started");
@@ -147,10 +142,6 @@ public class CollegeModel {
     /**
      * Find User by College
      *
-     * @param login
-     *            : get parameter
-     * @return bean
-     * @throws DatabaseException
      */
     public CollegeBean findByName(String name) throws ApplicationException {
      //   log.debug("Model findByName Started");
@@ -192,10 +183,6 @@ public class CollegeModel {
     /**
      * Find User by College
      *
-     * @param 
-     *            : get parameter
-     * @return bean
-     * @throws DatabaseException
      */
     public CollegeBean findByPK(long pk) throws ApplicationException {
         //log.debug("Model findByPK Started");
@@ -239,8 +226,6 @@ public class CollegeModel {
     /**
      * Update a College
      *
-     * @param bean
-     * @throws DatabaseException
      */
     public void update(CollegeBean bean) throws ApplicationException,
             DuplicateRecordException {
@@ -295,15 +280,6 @@ public class CollegeModel {
     /**
      * Search College with pagination
      *
-     * @return list : List of Users
-     * @param bean
-     *            : Search Parameters
-     * @param pageNo
-     *            : Current Page No.
-     * @param pageSize
-     *            : Size of Page
-     *
-     * @throws DatabaseException
      */
     public List search(CollegeBean bean, int pageNo, int pageSize)
             throws ApplicationException {
@@ -379,9 +355,6 @@ public class CollegeModel {
     /**
      * Search College
      *
-     * @param bean
-     *            : Search Parameters
-     * @throws DatabaseException
      */
     public List search(CollegeBean bean) throws ApplicationException {
         return search(bean, 0, 0);
@@ -390,8 +363,7 @@ public class CollegeModel {
     /**
      * Get List of College
      *
-     * @return list : List of College
-     * @throws DatabaseException
+     
      */
     public List list() throws ApplicationException {
         return list(0, 0);
@@ -400,12 +372,6 @@ public class CollegeModel {
     /**
      * Get List of College with pagination
      *
-     * @return list : List of College
-     * @param pageNo
-     *            : Current Page No.
-     * @param pageSize
-     *            : Size of Page
-     * @throws DatabaseException
      */
     public List list(int pageNo, int pageSize) throws ApplicationException {
        // log.debug("Model list Started");

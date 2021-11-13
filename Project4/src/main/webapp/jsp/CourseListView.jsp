@@ -1,3 +1,4 @@
+
 <%@page import="in.co.rays.util.DataUtility"%>
 <%@page import="in.co.rays.model.CourseModel"%>
 <%@page import="in.co.rays.util.HTMLUtility"%>
@@ -12,6 +13,9 @@
     pageEncoding="ISO-8859-1"%>
     
 <html>
+ <script src="<%=ORSView.APP_CONTEXT %>/js/jquery.min.js"></script>
+<script src="<%=ORSView.APP_CONTEXT %>/js/Checkbox11.js"></script>
+
 <head>
 <link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
 <title> Course List</title>
@@ -53,7 +57,7 @@
             
             <table width="100%" align="center">
                 <tr>
-                 <td align="center">
+                 <td align="Center">
                  <label> Course Name :</label> 
                  	<%=HTMLUtility.getList("cname", String.valueOf(bean.getId()), courselist) %>
                  <%-- 	<input type="text" name="cname" placeholder="Enter Course Name" Size= "25" value="<%=DataUtility.getStringData(bean.getName()) %>">
@@ -68,10 +72,9 @@
             
             <br>
             
-            <table border="1" width="100%" align="center" cellpadding=6px cellspacing=".2">
+            <table border="1" width="100%" align="center" cellpadding="4" cellspacing="0">
                 <tr>
-                <th><input type="checkbox" id="select_all" name="select">Select All.</th>
-                
+                     <th><input type="checkbox" id="select_all" name="select"> Select All </th>
                 <th>S.NO.</th>
                 <th>Course Name.</th>
                 <th>Duration.</th>

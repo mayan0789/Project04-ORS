@@ -4,6 +4,10 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Mayank
+ *
+ */
 public class DataUtility {
 
 	  /**
@@ -25,8 +29,7 @@ public class DataUtility {
     /**
      * Trims and trailing and leading spaces of a String
      *
-     * @param val
-     * @return
+     * 
      */
     public static String getString(String val) {
         if (DataValidator.isNotNull(val)) {
@@ -39,8 +42,7 @@ public class DataUtility {
     /**
      * Converts and Object to String
      *
-     * @param val
-     * @return
+     *
      */
     public static String getStringData(Object val) {
         if (val != null) {
@@ -53,8 +55,7 @@ public class DataUtility {
     /**
      * Converts String into Integer
      *
-     * @param val
-     * @return
+     *
      */
     public static int getInt(String val) {
         if (DataValidator.isInteger(val)) {
@@ -67,8 +68,7 @@ public class DataUtility {
     /**
      * Converts String into Long
      *
-     * @param val
-     * @return
+     * 
      */
     public static long getLong(String val) {
         if (DataValidator.isLong(val)) {
@@ -81,8 +81,7 @@ public class DataUtility {
     /**
      * Converts String into Date
      *
-     * @param val
-     * @return
+     * 
      */
     public static Date getDate(String val) {
         Date date = null;
@@ -97,8 +96,6 @@ public class DataUtility {
     /**
      * Converts Date into String
      *
-     * @param date
-     * @return
      */
     public static String getDateString(Date date) {
         try {
@@ -111,9 +108,7 @@ public class DataUtility {
     /**
      * Gets date after n number of days
      *
-     * @param date
-     * @param day
-     * @return
+     *
      */
     public static Date getDate(Date date, int day) {
         return null;
@@ -122,8 +117,7 @@ public class DataUtility {
     /**
      * Converts String into Time
      *
-     * @param val
-     * @return
+     * 
      */
     public static Timestamp getTimestamp(String val) {
 

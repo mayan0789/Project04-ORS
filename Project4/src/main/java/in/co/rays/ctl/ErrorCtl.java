@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import in.co.rays.util.ServletUtility;
 
-@WebServlet (name= "ErrorCtl" , urlPatterns ={"/ErrorCtl"})
+@WebServlet(name= "ErrorCtl" , urlPatterns ={"/ErrorCtl"})
 	public class ErrorCtl extends BaseCtl {
 		private static final long serialVersionUID = 1L;
 

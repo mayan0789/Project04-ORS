@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.util.HTMLUtility"%>
 <%@page import="in.co.rays.model.FacultyModel"%>
 <%@page import="in.co.rays.bean.FacultyBean"%>
 <%@page import="java.util.Iterator"%>
@@ -6,13 +7,12 @@
 <%@page import="in.co.rays.util.DataUtility"%>
 <%@page import="in.co.rays.util.ServletUtility"%>
 <html>
-<head>
-<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
-<title> Faculty List</title>
-
 <script src="<%=ORSView.APP_CONTEXT %>/js/jquery.min.js"></script>
 <script src="<%=ORSView.APP_CONTEXT %>/js/Checkbox11.js"></script>
 
+<head>
+<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16"/>
+<title> Faculty List</title>
 </head>
 <body>
 <%@include file ="Header.jsp"%>
@@ -20,6 +20,11 @@
 <center>
 <form action="<%=ORSView.FACULTY_LIST_CTL %>" method="post">
 	
+	<%
+		List faclist = (List)request.getAttribute("facname"); 
+	%>
+  
+  
 	<div align="center">
 			<h1>Faculty List</h1>
 			<h3><font style="color: green"><%=ServletUtility.getSuccessMessage(request)%></font> </h3>
@@ -41,7 +46,8 @@
 		<tr><th></th>
 		<td align="center">
 		<label>First Name :</label>
-		<input type="text" name="firstname" placeholder="Enter First Name" value=<%=ServletUtility.getParameter("firstname", request) %>>
+	<%-- 	<input type="text" name="firstname" placeholder="Enter First Name" value=<%=ServletUtility.getParameter("firstname", request) %>> --%>
+		<%=HTMLUtility.getList("firstname", String.valueOf(bean.getId()), faclist)%>
 		<label>Last Name :</label>
 		<input type="text" name="lastname" placeholder="Enter Last Name" value=<%=ServletUtility.getParameter("lastname", request) %>>		
 		<label>Login_ID</label>
@@ -53,12 +59,11 @@
 		</td></tr>
 	</table>
 	<br>	
-	<table border="1" width="100%" align="center" cellpadding=8px cellspacing=".2">
+	<table border="1" width="100%" align="center" cellpadding=5px cellspacing="0">
 		<tr>
 		
-			<th ><input type="checkbox" id="select_all" name ="Select">Select All.</th>
-			
-			<th>S.No.</th>
+      <th><input type="checkbox" id="select_all" name="select"> Select All </th>
+               <th>S.No.</th>
 			<th>First Name.</th>
 			<th>Last Name.</th>
 			<th>Login_id.</th>
@@ -75,7 +80,7 @@
 	 	bean =it.next();	
 		%>
 		
-	<tr>
+	<tr align="center">
 		<td><input type = "checkbox" class="checkbox" name="ids" value="<%=bean.getId() %>"></td>
 		<td><%=index++%></td>
 		<td><%=bean.getFirst_Name() %></td>

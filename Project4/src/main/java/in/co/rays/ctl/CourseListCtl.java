@@ -22,7 +22,7 @@ import in.co.rays.util.ServletUtility;
  * @author Mayank
  *
  */
-@WebServlet(name = "CourseListCtl", urlPatterns = {"/ctl/CourseListCtl"})
+@WebServlet(name = "CourseListCtl", urlPatterns = { "/ctl/CourseListCtl" })
 public class CourseListCtl extends BaseCtl {
 
 	/**
@@ -60,15 +60,15 @@ public class CourseListCtl extends BaseCtl {
 			throws ServletException, IOException {
 
 		log.debug("do get method of CourseCtl Started");
-		List list= null;
+		List list = null;
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
-		CourseBean bean = (CourseBean)populateBean(request);
+		CourseBean bean = (CourseBean) populateBean(request);
 		CourseModel model = new CourseModel();
 
 //		String op = DataUtility.getString(request.getParameter("operation"));
 		// String[] ids = request.getParameterValues("ids");
-		
+
 		try {
 			list = model.search(bean, pageNo, pageSize);
 			ServletUtility.setList(list, request);
@@ -101,15 +101,13 @@ public class CourseListCtl extends BaseCtl {
 		int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(request.getParameter("pageSize")) : pageSize;
-		
+
 		String op = DataUtility.getString(request.getParameter("operation"));
 		String[] ids = request.getParameterValues("ids");
 		CourseBean bean = (CourseBean) populateBean(request);
 		CourseModel model = new CourseModel();
-		
 
-
-	System.out.println("-----------------)))(((("+ids);
+		System.out.println("-----------------)))((((" + ids);
 		if (OP_SEARCH.equalsIgnoreCase(op)) {
 			pageNo = 1;
 		} else if (OP_NEXT.equalsIgnoreCase(op)) {
@@ -130,7 +128,7 @@ public class CourseListCtl extends BaseCtl {
 					deletebean.setId(DataUtility.getInt(id));
 					try {
 						model.delete(deletebean);
-				//		ServletUtility.forward(getView(), request, response);
+						// ServletUtility.forward(getView(), request, response);
 					} catch (ApplicationException e) {
 						e.printStackTrace();
 						ServletUtility.handleException(e, request, response);
@@ -143,30 +141,30 @@ public class CourseListCtl extends BaseCtl {
 			}
 		}
 		try {
-		//	if (!OP_DELETE.equalsIgnoreCase(op)) {
-				list = model.search(bean, pageNo, pageSize);
+			// if (!OP_DELETE.equalsIgnoreCase(op)) {
+			list = model.search(bean, pageNo, pageSize);
 			ServletUtility.setBean(bean, request);
 
-			//	System.out.println("(-----------------)"+ list.size());
-		//		ServletUtility.setList(list, request);
-		//	}
-				
+			// System.out.println("(-----------------)"+ list.size());
+			// ServletUtility.setList(list, request);
+			// }
+
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			log.error(e);
 			ServletUtility.handleException(e, request, response);
 			return;
 		}
-		 if (list == null || list.size() == 0 && !OP_DELETE.equalsIgnoreCase(op)) {
-				ServletUtility.setErrorMessage("No record Found", request);
-			}
+		if (list == null || list.size() == 0 && !OP_DELETE.equalsIgnoreCase(op)) {
+			ServletUtility.setErrorMessage("No record Found", request);
+		}
 
-	ServletUtility.setBean(bean, request);
-	
+		ServletUtility.setBean(bean, request);
+
 		ServletUtility.setList(list, request);
 		ServletUtility.setPageNo(pageNo, request);
 		ServletUtility.setPageSize(pageSize, request);
-	ServletUtility.forward(getView(), request, response);
+		ServletUtility.forward(getView(), request, response);
 	}
 
 	@Override
